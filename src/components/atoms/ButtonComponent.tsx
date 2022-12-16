@@ -3,6 +3,7 @@ import {Text, StyleSheet, View, TouchableOpacity} from 'react-native';
 
 interface ButtonComponentInterface {
   onPress: () => void;
+  props: any;
   text: string;
   style?: any;
   type?: 'primary' | 'secondary' | 'tertiary';
@@ -10,6 +11,7 @@ interface ButtonComponentInterface {
 
 const ButtonComponent = ({
   onPress,
+  props,
   text,
   style,
   type = 'primary',
