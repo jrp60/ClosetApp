@@ -1,19 +1,35 @@
 import React from 'react';
-import {View, Text} from 'react-native';
+import {View, Text, StyleSheet} from 'react-native';
 
 // interface TextComponentInterface {
 //   text: string
 //   style?: any
 // }
 
-View;
-
 const TextComponent = props => {
   return (
-    <View>
-      <Text>{props.children}</Text>
+    <View style={styles.textContainer}>
+      <Text style={[styles[props.type], props.style]}>{props.children}</Text>
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  title: {
+    fontSize: 20,
+    fontWeight: 'bold',
+  },
+  subtitle: {
+    fontSize: 16,
+    fontWeight: 'bold',
+  },
+  body: {
+    fontSize: 14,
+  },
+  textContainer: {
+    margin: 10,
+    fontFamily: 'Roboto',
+  },
+});
 
 export default TextComponent;
