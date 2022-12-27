@@ -3,7 +3,7 @@ import {Text, StyleSheet, View, TouchableOpacity} from 'react-native';
 import TextComponent from './TextComponent';
 
 interface ButtonComponentInterface {
-  onPress: () => void;
+  onPress: () => any;
   text: string;
   style?: any;
   type?: 'primary' | 'secondary' | 'tertiary';
