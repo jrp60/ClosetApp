@@ -49,7 +49,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#f4f4f4',
   },
   textprimary: {
-    color: '#dfdfdf',
+    color: '#F4F4F4',
   },
   textsecondary: {
     color: '#000',

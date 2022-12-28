@@ -1,15 +1,26 @@
 import React from 'react';
-import {View, Text, StyleSheet} from 'react-native';
+import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
+import ImgOutfitComponent from '../atoms/ImgOutfitComponent';
+import ButtonComponent from '../atoms/ButtonComponent';
 
 const DisplayScreen = () => {
   return (
-    <View>
-      <Text style={styles.text}>Display Screen</Text>
+    <View style={styles.container}>
+      <ButtonComponent onPress={() => {}} text=".....">
+        Hola
+      </ButtonComponent>
+      <ImgOutfitComponent></ImgOutfitComponent>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
   text: {
     fontSize: 30,
   },
