@@ -83,6 +83,22 @@
 		3B3941F62954F6050012147E /* EvilIcons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = EvilIcons.ttf; sourceTree = "<group>"; };
 		3B3941F72954F6050012147E /* Foundation.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Foundation.ttf; sourceTree = "<group>"; };
 		3B4392A12AC88292D35C810B /* Pods-ClosetApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ClosetApp.debug.xcconfig"; path = "Target Support Files/Pods-ClosetApp/Pods-ClosetApp.debug.xcconfig"; sourceTree = "<group>"; };
+		3BB5E2F8295BA84C0017A84B /* Fontisto.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Fontisto.ttf; sourceTree = "<group>"; };
+		3BB5E2F9295BA84C0017A84B /* Octicons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Octicons.ttf; sourceTree = "<group>"; };
+		3BB5E2FA295BA84C0017A84B /* Feather.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Feather.ttf; sourceTree = "<group>"; };
+		3BB5E2FB295BA84C0017A84B /* Entypo.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Entypo.ttf; sourceTree = "<group>"; };
+		3BB5E2FC295BA84C0017A84B /* FontAwesome5_Brands.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = FontAwesome5_Brands.ttf; sourceTree = "<group>"; };
+		3BB5E2FD295BA84C0017A84B /* MaterialCommunityIcons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = MaterialCommunityIcons.ttf; sourceTree = "<group>"; };
+		3BB5E2FE295BA84C0017A84B /* AntDesign.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = AntDesign.ttf; sourceTree = "<group>"; };
+		3BB5E2FF295BA84C0017A84B /* Foundation.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Foundation.ttf; sourceTree = "<group>"; };
+		3BB5E300295BA84C0017A84B /* Ionicons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Ionicons.ttf; sourceTree = "<group>"; };
+		3BB5E301295BA84C0017A84B /* FontAwesome5_Solid.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = FontAwesome5_Solid.ttf; sourceTree = "<group>"; };
+		3BB5E302295BA84C0017A84B /* FontAwesome5_Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = FontAwesome5_Regular.ttf; sourceTree = "<group>"; };
+		3BB5E303295BA84C0017A84B /* FontAwesome.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = FontAwesome.ttf; sourceTree = "<group>"; };
+		3BB5E304295BA84C0017A84B /* Zocial.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Zocial.ttf; sourceTree = "<group>"; };
+		3BB5E305295BA84C0017A84B /* EvilIcons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = EvilIcons.ttf; sourceTree = "<group>"; };
+		3BB5E306295BA84C0017A84B /* SimpleLineIcons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = SimpleLineIcons.ttf; sourceTree = "<group>"; };
+		3BB5E307295BA84C0017A84B /* MaterialIcons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = MaterialIcons.ttf; sourceTree = "<group>"; };
 		5709B34CF0A7D63546082F79 /* Pods-ClosetApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ClosetApp.release.xcconfig"; path = "Target Support Files/Pods-ClosetApp/Pods-ClosetApp.release.xcconfig"; sourceTree = "<group>"; };
 		5B7EB9410499542E8C5724F5 /* Pods-ClosetApp-ClosetAppTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ClosetApp-ClosetAppTests.debug.xcconfig"; path = "Target Support Files/Pods-ClosetApp-ClosetAppTests/Pods-ClosetApp-ClosetAppTests.debug.xcconfig"; sourceTree = "<group>"; };
 		5DCACB8F33CDC322A6C60F78 /* libPods-ClosetApp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ClosetApp.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -151,26 +167,28 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		3B3941E82954F5570012147E /* Fonts */ = {
+		3BB5E2F7295BA84C0017A84B /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
-				3B3941ED2954F6050012147E /* AntDesign.ttf */,
-				3B3941F22954F6050012147E /* Entypo.ttf */,
-				3B3941F62954F6050012147E /* EvilIcons.ttf */,
-				3B3941EC2954F6050012147E /* Feather.ttf */,
-				3B3941F32954F6050012147E /* FontAwesome.ttf */,
-				3B3941F12954F6050012147E /* FontAwesome5_Brands.ttf */,
-				3B3941EE2954F6050012147E /* FontAwesome5_Regular.ttf */,
-				3B3941EB2954F6050012147E /* FontAwesome5_Solid.ttf */,
-				3B3941F72954F6050012147E /* Foundation.ttf */,
-				3B3941EF2954F6050012147E /* Ionicons.ttf */,
-				3B3941F42954F6050012147E /* MaterialCommunityIcons.ttf */,
-				3B3941F52954F6050012147E /* MaterialIcons.ttf */,
-				3B3941EA2954F6050012147E /* Octicons.ttf */,
-				3B3941F02954F6050012147E /* SimpleLineIcons.ttf */,
-				3B3941E92954F6050012147E /* Zocial.ttf */,
+				3BB5E2F8295BA84C0017A84B /* Fontisto.ttf */,
+				3BB5E2F9295BA84C0017A84B /* Octicons.ttf */,
+				3BB5E2FA295BA84C0017A84B /* Feather.ttf */,
+				3BB5E2FB295BA84C0017A84B /* Entypo.ttf */,
+				3BB5E2FC295BA84C0017A84B /* FontAwesome5_Brands.ttf */,
+				3BB5E2FD295BA84C0017A84B /* MaterialCommunityIcons.ttf */,
+				3BB5E2FE295BA84C0017A84B /* AntDesign.ttf */,
+				3BB5E2FF295BA84C0017A84B /* Foundation.ttf */,
+				3BB5E300295BA84C0017A84B /* Ionicons.ttf */,
+				3BB5E301295BA84C0017A84B /* FontAwesome5_Solid.ttf */,
+				3BB5E302295BA84C0017A84B /* FontAwesome5_Regular.ttf */,
+				3BB5E303295BA84C0017A84B /* FontAwesome.ttf */,
+				3BB5E304295BA84C0017A84B /* Zocial.ttf */,
+				3BB5E305295BA84C0017A84B /* EvilIcons.ttf */,
+				3BB5E306295BA84C0017A84B /* SimpleLineIcons.ttf */,
+				3BB5E307295BA84C0017A84B /* MaterialIcons.ttf */,
 			);
-			path = Fonts;
+			name = Fonts;
+			path = "../node_modules/react-native-vector-icons/Fonts";
 			sourceTree = "<group>";
 		};
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
@@ -183,7 +201,8 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
-				3B3941E82954F5570012147E /* Fonts */,
+
+				3BB5E2F7295BA84C0017A84B /* Fonts */,
 				13B07FAE1A68108700A75B9A /* ClosetApp */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				00E356EF1AD99517003FC87E /* ClosetAppTests */,
