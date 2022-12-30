@@ -6,9 +6,6 @@ import ButtonComponent from '../atoms/ButtonComponent';
 const DisplayScreen = () => {
   return (
     <View style={styles.container}>
-      <ButtonComponent onPress={() => {}} text=".....">
-        Hola
-      </ButtonComponent>
       <ImgOutfitComponent></ImgOutfitComponent>
     </View>
   );
