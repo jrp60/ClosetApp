@@ -1,6 +1,7 @@
 import React from 'react';
 import {Text, StyleSheet, View, TouchableOpacity} from 'react-native';
 import TextComponent from './TextComponent';
+import {Colors} from '../styles';
 
 interface ButtonComponentInterface {
   onPress: () => any;
@@ -37,25 +38,25 @@ const styles = StyleSheet.create({
     margin: 10,
   },
   primary: {
-    backgroundColor: '#4a3621',
+    backgroundColor: Colors.primary,
     fontSize: 20,
   },
   secondary: {
-    backgroundColor: '#f4f4f4',
+    backgroundColor: Colors.background,
     borderWidth: 1,
-    borderColor: '#000',
+    borderColor: Colors.black,
   },
   tertiary: {
-    backgroundColor: '#f4f4f4',
+    backgroundColor: Colors.background,
   },
   textprimary: {
-    color: '#F4F4F4',
+    color: Colors.background,
   },
   textsecondary: {
-    color: '#000',
+    color: Colors.black,
   },
   texttertiary: {
-    color: '#333',
+    color: Colors.inactiveTintColor,
   },
   touchableStyle: {
     //flex: 1,
@@ -64,7 +65,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     paddingVertical: 10,
     paddingHorizontal: 40,
-    borderRadius: 5,
+    borderRadius: 18,
     color: 'red',
   },
 });

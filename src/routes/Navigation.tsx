@@ -7,15 +7,16 @@ import {SafeAreaView} from 'react-native-safe-area-context';
 import DisplayScreen from '../components/screens/DisplayScreen';
 import CameraScreen from '../components/screens/CameraScreen';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import {Colors} from '../components/styles';
 
 const Stack = createNativeStackNavigator();
 const MyTheme = {
   ...DefaultTheme,
   colors: {
     ...DefaultTheme.colors,
-    primary: '#4a3621',
-    background: '#f4f4f4',
-    inactiveTintColor: '#a6a6a6',
+    primary: Colors.primary,
+    background: Colors.background,
+    inactiveTintColor: Colors.inactiveTintColor,
   },
 };
 
@@ -25,10 +26,10 @@ function MyTabs() {
   return (
     <Tab.Navigator
       screenOptions={{
-        tabBarStyle: {backgroundColor: MyTheme.colors.background},
-        tabBarActiveTintColor: MyTheme.colors.primary,
-        tabBarInactiveTintColor: MyTheme.colors.inactiveTintColor,
-        headerStyle: {backgroundColor: MyTheme.colors.background},
+        tabBarStyle: {backgroundColor: Colors.background},
+        tabBarActiveTintColor: Colors.primary,
+        tabBarInactiveTintColor: Colors.inactiveTintColor,
+        headerStyle: {backgroundColor: Colors.background},
       }}>
       <Tab.Screen
         name="HelloWorldScreen"
