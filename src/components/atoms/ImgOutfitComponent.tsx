@@ -11,7 +11,9 @@ import {
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import {Colors} from '../styles';
 
-const ImgOutfitComponent = () => {
+const ImgOutfitComponent = ({urlImage}) => {
+  console.log('URL IMAGE: ', urlImage);
+
   const windowWidth = Dimensions.get('window').width;
 
   const scaleHeight = ({source, desiredWidth}) => {
@@ -21,43 +23,30 @@ const ImgOutfitComponent = () => {
     if (ratio < 0.7) {
       ratio = 0.7;
     }
+    console.log('heith: ', desiredWidth / ratio);
+
     return desiredWidth / ratio;
   };
 
   const imageHeight = scaleHeight({
-    source: require('../../../assets/images/outfit4.jpg'),
+    source: urlImage,
     desiredWidth: windowWidth,
   });
 
-  const like = () => {
-    console.log('like');
-  };
-
   return (
     <ImageBackground
-      style={[styles.outfit, {height: imageHeight, maxHeight: '90%'}]}
+      style={{
+        height: imageHeight,
+        maxHeight: '90%',
+        width: '100%',
+        backgroundColor: 'red',
+      }}
       resizeMode="contain"
-      source={require('../../../assets/images/outfit4.jpg')}>
-      <TouchableOpacity onPress={like} style={styles.likeContainer}>
-        <Ionicons
-          name="md-heart-circle"
-          size={50}
-          color={Colors.primary}
-          onPress={like}
-        />
-      </TouchableOpacity>
-    </ImageBackground>
+      source={urlImage}></ImageBackground>
   );
 };
 
 const styles = StyleSheet.create({
-  outfit: {
-    width: '100%',
-    backgroundColor: '#98f99c',
-    display: 'flex',
-    justifyContent: 'flex-end',
-    alignItems: 'center',
-  },
   likeContainer: {
     top: 55,
   },
