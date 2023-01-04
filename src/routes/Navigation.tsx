@@ -9,6 +9,9 @@ import CameraScreen from '../components/screens/CameraScreen';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import {Colors} from '../components/styles';
 
+import {Provider} from 'react-redux';
+import {store} from '../store/store';
+
 const Stack = createNativeStackNavigator();
 const MyTheme = {
   ...DefaultTheme,
@@ -60,20 +63,22 @@ function MyTabs() {
 
 function Navigation() {
   return (
-    <NavigationContainer theme={MyTheme}>
-      {/* <SafeAreaView> */}
-      <Stack.Navigator
-        initialRouteName="MyTabs"
-        screenOptions={{
-          headerShown: false,
-        }}>
-        <Stack.Screen name="MyTabs" component={MyTabs} />
-        <Stack.Screen name="HelloWorldScreen" component={HelloWorldScreen} />
-        <Stack.Screen name="DisplayScreen" component={DisplayScreen} />
-        <Stack.Screen name="CameraScreen" component={CameraScreen} />
-      </Stack.Navigator>
-      {/* </SafeAreaView> */}
-    </NavigationContainer>
+    <Provider store={store}>
+      <NavigationContainer theme={MyTheme}>
+        {/* <SafeAreaView> */}
+        <Stack.Navigator
+          initialRouteName="MyTabs"
+          screenOptions={{
+            headerShown: false,
+          }}>
+          <Stack.Screen name="MyTabs" component={MyTabs} />
+          <Stack.Screen name="HelloWorldScreen" component={HelloWorldScreen} />
+          <Stack.Screen name="DisplayScreen" component={DisplayScreen} />
+          <Stack.Screen name="CameraScreen" component={CameraScreen} />
+        </Stack.Navigator>
+        {/* </SafeAreaView> */}
+      </NavigationContainer>
+    </Provider>
   );
 }
 

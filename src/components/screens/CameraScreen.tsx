@@ -1,7 +1,12 @@
 import React from 'react';
 import {View, Text, StyleSheet, Button} from 'react-native';
 
-import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
+import {
+  CameraOptions,
+  ImageLibraryOptions,
+  launchCamera,
+  launchImageLibrary,
+} from 'react-native-image-picker';
 import ButtonComponent from '../atoms/ButtonComponent';
 
 const CameraScreen = () => {
@@ -24,7 +29,7 @@ const CameraScreen = () => {
   // }
 
   // You can also use as a promise without 'callback':
-  const optionsCamera = {
+  const optionsCamera: CameraOptions = {
     mediaType: 'photo',
     // includeBase64: false,
     // maxHeight: 200,
@@ -45,7 +50,7 @@ const CameraScreen = () => {
   };
 
   return (
-    <View style={{flex: 1}}>
+    <View style={styles.container}>
       <ButtonComponent onPress={camera} text={'Open Camera'}></ButtonComponent>
       <ButtonComponent
         onPress={picker}
@@ -53,5 +58,13 @@ const CameraScreen = () => {
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+});
 
 export default CameraScreen;
