@@ -79,10 +79,14 @@ const CameraScreen = () => {
 
   return (
     <View style={styles.container}>
-      <ButtonComponent onPress={camera} text={'Open Camera'}></ButtonComponent>
+      <ButtonComponent
+        onPress={camera}
+        text={'Open Camera'}
+        style={styles.buttonMargin}></ButtonComponent>
       <ButtonComponent
         onPress={picker}
-        text={'Pick in gallery'}></ButtonComponent>
+        text={'Pick in gallery'}
+        style={styles.buttonMargin}></ButtonComponent>
     </View>
   );
 };
@@ -92,6 +96,9 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  buttonMargin: {
+    margin: 10,
   },
 });
 

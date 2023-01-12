@@ -17,11 +17,11 @@ const ButtonComponent = ({
   type = 'primary',
 }: ButtonComponentInterface) => {
   return (
-    <View style={[styles.container]}>
+    <View style={[styles.container, style]}>
       <TouchableOpacity
         onPress={onPress}
         style={[styles[type], styles.touchableStyle]}>
-        <TextComponent type="title" style={styles[`text${type}`]}>
+        <TextComponent type={type} style={styles[`text${type}`]}>
           {text}
         </TextComponent>
       </TouchableOpacity>
@@ -33,7 +33,6 @@ const styles = StyleSheet.create({
   container: {
     alignItems: 'center',
     width: '80%',
-    margin: 10,
   },
   primary: {
     backgroundColor: Colors.primary,
@@ -57,7 +56,6 @@ const styles = StyleSheet.create({
     color: Colors.inactiveTintColor,
   },
   touchableStyle: {
-    //flex: 1,
     width: '100%',
     alignItems: 'center',
     justifyContent: 'center',

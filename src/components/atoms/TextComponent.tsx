@@ -30,6 +30,18 @@ const styles = StyleSheet.create({
     //margin: 10,
     fontFamily: 'Roboto',
   },
+  // For buttonComponent
+  primary: {
+    fontSize: 20,
+    fontWeight: 'bold',
+  },
+  textsecondary: {
+    fontSize: 16,
+    fontWeight: 'bold',
+  },
+  texttertiary: {
+    fontSize: 14,
+  },
 });
 
 export default TextComponent;
