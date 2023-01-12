@@ -1,5 +1,5 @@
 import React from 'react';
-import {Text, StyleSheet, View, TouchableOpacity} from 'react-native';
+import {StyleSheet, View, TouchableOpacity} from 'react-native';
 import TextComponent from './TextComponent';
 import {Colors} from '../styles';
 
@@ -16,8 +16,6 @@ const ButtonComponent = ({
   style,
   type = 'primary',
 }: ButtonComponentInterface) => {
-  console.log('text', text);
-
   return (
     <View style={[styles.container]}>
       <TouchableOpacity
@@ -63,7 +61,7 @@ const styles = StyleSheet.create({
     width: '100%',
     alignItems: 'center',
     justifyContent: 'center',
-    paddingVertical: 10,
+    paddingVertical: 18,
     paddingHorizontal: 40,
     borderRadius: 18,
     color: 'red',

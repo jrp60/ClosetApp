@@ -15,10 +15,17 @@ import Navigation from './src/routes/Navigation';
 import {NavigationContainer, StackActions} from '@react-navigation/native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 
-const App: () => Node = () => {
-  //const isDarkMode = useColorScheme() === 'dark';
+import {Provider} from 'react-redux';
+import {store} from './src/store/store';
+//import store from './src/store/store';
 
-  return <Navigation />;
+const App: () => Node = () => {
+  return (
+    // <Provider store={store}>
+    //   <Navigation />;
+    // </Provider>
+    <Navigation />
+  );
 };
 
 export default App;

@@ -1,29 +1,23 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
-  View,
   Image,
   StyleSheet,
-  TouchableOpacity,
   ImageBackground,
   Dimensions,
+  View,
 } from 'react-native';
 
-import Ionicons from 'react-native-vector-icons/Ionicons';
-import {Colors} from '../styles';
-
 const ImgOutfitComponent = ({urlImage}) => {
-  console.log('URL IMAGE: ', urlImage);
-
   const windowWidth = Dimensions.get('window').width;
 
   const scaleHeight = ({source, desiredWidth}) => {
-    const {width, height} = Image.resolveAssetSource(source);
-    let ratio = width / height;
-    console.log('ratio::', ratio);
+    console.log('source: ', source);
+
+    //const {width, height} = Image.resolveAssetSource(source);
+    let ratio = 1 / 1;
     if (ratio < 0.7) {
       ratio = 0.7;
     }
-    console.log('heith: ', desiredWidth / ratio);
 
     return desiredWidth / ratio;
   };
@@ -39,10 +33,10 @@ const ImgOutfitComponent = ({urlImage}) => {
         height: imageHeight,
         maxHeight: '90%',
         width: '100%',
-        backgroundColor: 'red',
+        //backgroundColor: 'red',
       }}
       resizeMode="contain"
-      source={urlImage}></ImageBackground>
+      source={{uri: urlImage}}></ImageBackground>
   );
 };
 
