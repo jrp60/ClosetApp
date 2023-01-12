@@ -1,14 +1,20 @@
-import React from 'react';
-import {Image, StyleSheet, ImageBackground, Dimensions} from 'react-native';
+import React, {useState} from 'react';
+import {
+  Image,
+  StyleSheet,
+  ImageBackground,
+  Dimensions,
+  View,
+} from 'react-native';
 
 const ImgOutfitComponent = ({urlImage}) => {
-  console.log('URL IMAGE: ', urlImage);
-
   const windowWidth = Dimensions.get('window').width;
 
   const scaleHeight = ({source, desiredWidth}) => {
-    const {width, height} = Image.resolveAssetSource(source);
-    let ratio = width / height;
+    console.log('source: ', source);
+
+    //const {width, height} = Image.resolveAssetSource(source);
+    let ratio = 1 / 1;
     if (ratio < 0.7) {
       ratio = 0.7;
     }
@@ -27,10 +33,10 @@ const ImgOutfitComponent = ({urlImage}) => {
         height: imageHeight,
         maxHeight: '90%',
         width: '100%',
-        backgroundColor: 'red',
+        //backgroundColor: 'red',
       }}
       resizeMode="contain"
-      source={urlImage}></ImageBackground>
+      source={{uri: urlImage}}></ImageBackground>
   );
 };
 

@@ -6,7 +6,7 @@ export interface LikeCounterState {
 }
 
 const initialState: LikeCounterState = {
-  value: 1,
+  value: 122322996,
 };
 
 export const likeCounterSlice = createSlice({

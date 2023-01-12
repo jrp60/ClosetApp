@@ -9,17 +9,16 @@ import {useDispatch, useSelector} from 'react-redux';
 import {transformNumber} from '../../utils/numberFormat';
 import {text} from 'stream/consumers';
 
-const OutfitMolecule = ({onPress, urlImage}) => {
+const OutfitMolecule = ({onPress, item}) => {
   const count = useSelector(state => state.likeCounter.value);
 
-  const textNumber = transformNumber(count);
+  const textNumber = transformNumber(item.likes);
+
   return (
     <View style={styles.container}>
-      <ImgOutfitComponent urlImage={urlImage}></ImgOutfitComponent>
+      <ImgOutfitComponent urlImage={item.imageBin}></ImgOutfitComponent>
       <TouchableOpacity onPress={onPress} style={styles.likeContainer}>
         <Ionicons
-          //name="md-heart-circle"
-          //name="md-heart-outline"
           name="heart-circle"
           size={90}
           color={Colors.primary}
@@ -36,7 +35,6 @@ const OutfitMolecule = ({onPress, urlImage}) => {
 const styles = StyleSheet.create({
   container: {
     width: '100%',
-    backgroundColor: '#aqua',
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
@@ -47,12 +45,12 @@ const styles = StyleSheet.create({
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    maxHeight: 120,
+    maxHeight: 100,
+    marginTop: 10,
   },
   likeNumber: {
     color: Colors.primary,
-    // position: 'absolute',
-    top: -64,
+    top: -58,
     left: -3,
   },
 });
