@@ -10,15 +10,18 @@ const HelloWorldScreen = () => {
       <ButtonComponent
         type="primary"
         onPress={() => {}}
-        text="Primary"></ButtonComponent>
+        text="Primary"
+        style={styles.marginButton}></ButtonComponent>
       <ButtonComponent
         type="secondary"
         onPress={() => {}}
-        text="Secondary"></ButtonComponent>
+        text="Secondary"
+        style={styles.marginButton}></ButtonComponent>
       <ButtonComponent
         type="tertiary"
         onPress={() => {}}
-        text="Tertiary"></ButtonComponent>
+        text="Tertiary"
+        style={styles.marginButton}></ButtonComponent>
     </View>
   );
 };
@@ -28,6 +31,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     flex: 1,
+  },
+  marginButton: {
+    margin: 10,
   },
 });
 

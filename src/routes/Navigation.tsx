@@ -11,6 +11,8 @@ import {Colors} from '../components/styles';
 
 import {Provider} from 'react-redux';
 import {store} from '../store/store';
+import LoginScreen from '../components/screens/LoginScreen';
+import SignUpScreen from '../components/screens/SignUpScreen';
 
 const Stack = createNativeStackNavigator();
 const MyTheme = {
@@ -55,6 +57,17 @@ function MyTabs() {
           ),
         }}
       />
+      <Tab.Screen
+        name="Login"
+        component={LoginScreen}
+        options={{
+          tabBarLabel: 'Login',
+          headerShown: false,
+          tabBarIcon: ({color, size}) => (
+            <Ionicons name="user" size={28} color={color} />
+          ),
+        }}
+      />
       <Tab.Screen name="Settings" component={DisplayScreen} />
     </Tab.Navigator>
   );
@@ -74,6 +87,8 @@ function Navigation() {
           <Stack.Screen name="HelloWorldScreen" component={HelloWorldScreen} />
           <Stack.Screen name="DisplayScreen" component={DisplayScreen} />
           <Stack.Screen name="CameraScreen" component={CameraScreen} />
+          <Stack.Screen name="Login" component={LoginScreen} />
+          <Stack.Screen name="SignUp" component={SignUpScreen} />
         </Stack.Navigator>
         {/* </SafeAreaView> */}
       </NavigationContainer>
