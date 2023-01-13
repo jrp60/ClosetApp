@@ -1,11 +1,5 @@
 import React, {useState} from 'react';
-import {
-  Image,
-  StyleSheet,
-  ImageBackground,
-  Dimensions,
-  View,
-} from 'react-native';
+import {StyleSheet, ImageBackground, Dimensions} from 'react-native';
 
 const ImgOutfitComponent = ({urlImage}) => {
   const windowWidth = Dimensions.get('window').width;
@@ -33,7 +27,6 @@ const ImgOutfitComponent = ({urlImage}) => {
         height: imageHeight,
         maxHeight: '90%',
         width: '100%',
-        //backgroundColor: 'red',
       }}
       resizeMode="contain"
       source={{uri: urlImage}}></ImageBackground>

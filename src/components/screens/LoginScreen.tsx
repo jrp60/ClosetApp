@@ -14,6 +14,8 @@ const LoginScreen = ({navigation}) => {
       alert('Insert user and password');
     }
   };
+
+  //TODO - Implementar
   const forgotPassword = () => {
     alert('Forgot password');
   };

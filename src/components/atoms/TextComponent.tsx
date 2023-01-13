@@ -1,12 +1,7 @@
 import React from 'react';
 import {View, Text, StyleSheet} from 'react-native';
 
-// interface TextComponentInterface {
-//   text: string
-//   style?: any
-// }
-
-const TextComponent = props => {
+const TextComponent = ({...props}) => {
   return (
     <View style={styles.textContainer}>
       <Text style={[styles[props.type], props.style]}>{props.children}</Text>
@@ -26,10 +21,7 @@ const styles = StyleSheet.create({
   body: {
     fontSize: 14,
   },
-  textContainer: {
-    //margin: 10,
-    fontFamily: 'Roboto',
-  },
+  textContainer: {},
   // For buttonComponent
   primary: {
     fontSize: 20,

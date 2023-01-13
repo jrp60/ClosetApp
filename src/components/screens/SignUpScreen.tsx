@@ -24,6 +24,7 @@ const SignUpScreen = ({navigation}) => {
     if (reg.test(text) === false) {
       console.log('Email is Not Correct');
       Alert.alert('El Correo no es correcto');
+      alert('Forgot password');
       return false;
     } else {
       console.log('Email is Correct');
@@ -49,6 +50,7 @@ const SignUpScreen = ({navigation}) => {
     }
   };
 
+  //TODO - Implementar
   const doUserRegistration = () => {};
 
   return (
@@ -57,28 +59,35 @@ const SignUpScreen = ({navigation}) => {
       <TextInputComponent
         placeholder={'Usuario'}
         value={user}
-        setValue={user => setUser(user)}
+        onChangeText={setUser}
+        style={styles.input}
       />
       <TextInputComponent
         placeholder={'Correo'}
         value={email}
-        onChangeText={text => validateEmail(text)}
-        setValue={email => setEmail(email)}
+        onChangeText={setEmail}
+        style={styles.input}
       />
       <TextInputComponent
         placeholder={'Contraseña'}
         value={password}
-        setValue={password => setPassword(password)}
+        onChangeText={setPassword}
         secureTextEntry
+        style={styles.input}
       />
       <TextInputComponent
         placeholder={'Confirmar contraseña'}
         value={passwordConfirm}
-        setValue={passwordConfirm => setPasswordConfirm(passwordConfirm)}
+        onChangeText={setPasswordConfirm}
         secureTextEntry
+        style={styles.input}
       />
 
-      <ButtonComponent onPress={signUpValidation} text="Registrar" />
+      <ButtonComponent
+        onPress={signUpValidation}
+        text="Registrar"
+        style={styles.input}
+      />
 
       <ButtonComponent
         onPress={() => navigation.goBack()}
@@ -94,6 +103,10 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  input: {
+    width: '80%',
+    marginVertical: 5,
   },
 });
 
