@@ -7,7 +7,6 @@ import TextComponent from '../atoms/TextComponent';
 import {useDispatch, useSelector} from 'react-redux';
 //import type {RootState} from '../../store/store';
 import {transformNumber} from '../../utils/numberFormat';
-import {text} from 'stream/consumers';
 
 const OutfitMolecule = ({onPress, item}) => {
   const count = useSelector(state => state.likeCounter.value);
