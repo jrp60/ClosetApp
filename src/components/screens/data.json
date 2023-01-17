@@ -1,0 +1,293 @@
+{
+  "exception": "RuntimeException",
+  "file": "/Applications/XAMPP/xamppfiles/htdocs/closetapp/vendor/laravel/framework/src/Illuminate/Http/Request.php",
+  "line": 515,
+  "message": "Session store not set on request.",
+  "trace": [
+    {
+      "class": "Illuminate\\Http\\Request",
+      "file": "/Applications/XAMPP/xamppfiles/htdocs/closetapp/app/Http/Controllers/Auth/LoginController.php",
+      "function": "session",
+      "line": 52,
+      "type": "->"
+    },
+    {
+      "class": "App\\Http\\Controllers\\Auth\\LoginController",
+      "file": "/Applications/XAMPP/xamppfiles/htdocs/closetapp/vendor/laravel/framework/src/Illuminate/Routing/Controller.php",
+      "function": "login",
+      "line": 54,
+      "type": "->"
+    },
+    {
+      "class": "Illuminate\\Routing\\Controller",
+      "file": "/Applications/XAMPP/xamppfiles/htdocs/closetapp/vendor/laravel/framework/src/Illuminate/Routing/ControllerDispatcher.php",
+      "function": "callAction",
+      "line": 45,
+      "type": "->"
+    },
+    {
+      "class": "Illuminate\\Routing\\ControllerDispatcher",
+      "file": "/Applications/XAMPP/xamppfiles/htdocs/closetapp/vendor/laravel/framework/src/Illuminate/Routing/Route.php",
+      "function": "dispatch",
+      "line": 262,
+      "type": "->"
+    },
+    {
+      "class": "Illuminate\\Routing\\Route",
+      "file": "/Applications/XAMPP/xamppfiles/htdocs/closetapp/vendor/laravel/framework/src/Illuminate/Routing/Route.php",
+      "function": "runController",
+      "line": 205,
+      "type": "->"
+    },
+    {
+      "class": "Illuminate\\Routing\\Route",
+      "file": "/Applications/XAMPP/xamppfiles/htdocs/closetapp/vendor/laravel/framework/src/Illuminate/Routing/Router.php",
+      "function": "run",
+      "line": 721,
+      "type": "->"
+    },
+    {
+      "class": "Illuminate\\Routing\\Router",
+      "file": "/Applications/XAMPP/xamppfiles/htdocs/closetapp/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php",
+      "function": "Illuminate\\Routing\\{closure}",
+      "line": 128,
+      "type": "->"
+    },
+    {
+      "class": "Illuminate\\Pipeline\\Pipeline",
+      "file": "/Applications/XAMPP/xamppfiles/htdocs/closetapp/app/Http/Middleware/RedirectIfAuthenticated.php",
+      "function": "Illuminate\\Pipeline\\{closure}",
+      "line": 30,
+      "type": "->"
+    },
+    {
+      "class": "App\\Http\\Middleware\\RedirectIfAuthenticated",
+      "file": "/Applications/XAMPP/xamppfiles/htdocs/closetapp/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php",
+      "function": "handle",
+      "line": 167,
+      "type": "->"
+    },
+    {
+      "class": "Illuminate\\Pipeline\\Pipeline",
+      "file": "/Applications/XAMPP/xamppfiles/htdocs/closetapp/vendor/laravel/framework/src/Illuminate/Routing/Middleware/SubstituteBindings.php",
+      "function": "Illuminate\\Pipeline\\{closure}",
+      "line": 50,
+      "type": "->"
+    },
+    {
+      "class": "Illuminate\\Routing\\Middleware\\SubstituteBindings",
+      "file": "/Applications/XAMPP/xamppfiles/htdocs/closetapp/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php",
+      "function": "handle",
+      "line": 167,
+      "type": "->"
+    },
+    {
+      "class": "Illuminate\\Pipeline\\Pipeline",
+      "file": "/Applications/XAMPP/xamppfiles/htdocs/closetapp/vendor/laravel/framework/src/Illuminate/Routing/Middleware/ThrottleRequests.php",
+      "function": "Illuminate\\Pipeline\\{closure}",
+      "line": 127,
+      "type": "->"
+    },
+    {
+      "class": "Illuminate\\Routing\\Middleware\\ThrottleRequests",
+      "file": "/Applications/XAMPP/xamppfiles/htdocs/closetapp/vendor/laravel/framework/src/Illuminate/Routing/Middleware/ThrottleRequests.php",
+      "function": "handleRequest",
+      "line": 103,
+      "type": "->"
+    },
+    {
+      "class": "Illuminate\\Routing\\Middleware\\ThrottleRequests",
+      "file": "/Applications/XAMPP/xamppfiles/htdocs/closetapp/vendor/laravel/framework/src/Illuminate/Routing/Middleware/ThrottleRequests.php",
+      "function": "handleRequestUsingNamedLimiter",
+      "line": 55,
+      "type": "->"
+    },
+    {
+      "class": "Illuminate\\Routing\\Middleware\\ThrottleRequests",
+      "file": "/Applications/XAMPP/xamppfiles/htdocs/closetapp/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php",
+      "function": "handle",
+      "line": 167,
+      "type": "->"
+    },
+    {
+      "class": "Illuminate\\Pipeline\\Pipeline",
+      "file": "/Applications/XAMPP/xamppfiles/htdocs/closetapp/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php",
+      "function": "Illuminate\\Pipeline\\{closure}",
+      "line": 103,
+      "type": "->"
+    },
+    {
+      "class": "Illuminate\\Pipeline\\Pipeline",
+      "file": "/Applications/XAMPP/xamppfiles/htdocs/closetapp/vendor/laravel/framework/src/Illuminate/Routing/Router.php",
+      "function": "then",
+      "line": 723,
+      "type": "->"
+    },
+    {
+      "class": "Illuminate\\Routing\\Router",
+      "file": "/Applications/XAMPP/xamppfiles/htdocs/closetapp/vendor/laravel/framework/src/Illuminate/Routing/Router.php",
+      "function": "runRouteWithinStack",
+      "line": 698,
+      "type": "->"
+    },
+    {
+      "class": "Illuminate\\Routing\\Router",
+      "file": "/Applications/XAMPP/xamppfiles/htdocs/closetapp/vendor/laravel/framework/src/Illuminate/Routing/Router.php",
+      "function": "runRoute",
+      "line": 662,
+      "type": "->"
+    },
+    {
+      "class": "Illuminate\\Routing\\Router",
+      "file": "/Applications/XAMPP/xamppfiles/htdocs/closetapp/vendor/laravel/framework/src/Illuminate/Routing/Router.php",
+      "function": "dispatchToRoute",
+      "line": 651,
+      "type": "->"
+    },
+    {
+      "class": "Illuminate\\Routing\\Router",
+      "file": "/Applications/XAMPP/xamppfiles/htdocs/closetapp/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php",
+      "function": "dispatch",
+      "line": 167,
+      "type": "->"
+    },
+    {
+      "class": "Illuminate\\Foundation\\Http\\Kernel",
+      "file": "/Applications/XAMPP/xamppfiles/htdocs/closetapp/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php",
+      "function": "Illuminate\\Foundation\\Http\\{closure}",
+      "line": 128,
+      "type": "->"
+    },
+    {
+      "class": "Illuminate\\Pipeline\\Pipeline",
+      "file": "/Applications/XAMPP/xamppfiles/htdocs/closetapp/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/TransformsRequest.php",
+      "function": "Illuminate\\Pipeline\\{closure}",
+      "line": 21,
+      "type": "->"
+    },
+    {
+      "class": "Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest",
+      "file": "/Applications/XAMPP/xamppfiles/htdocs/closetapp/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/ConvertEmptyStringsToNull.php",
+      "function": "handle",
+      "line": 31,
+      "type": "->"
+    },
+    {
+      "class": "Illuminate\\Foundation\\Http\\Middleware\\ConvertEmptyStringsToNull",
+      "file": "/Applications/XAMPP/xamppfiles/htdocs/closetapp/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php",
+      "function": "handle",
+      "line": 167,
+      "type": "->"
+    },
+    {
+      "class": "Illuminate\\Pipeline\\Pipeline",
+      "file": "/Applications/XAMPP/xamppfiles/htdocs/closetapp/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/TransformsRequest.php",
+      "function": "Illuminate\\Pipeline\\{closure}",
+      "line": 21,
+      "type": "->"
+    },
+    {
+      "class": "Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest",
+      "file": "/Applications/XAMPP/xamppfiles/htdocs/closetapp/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/TrimStrings.php",
+      "function": "handle",
+      "line": 40,
+      "type": "->"
+    },
+    {
+      "class": "Illuminate\\Foundation\\Http\\Middleware\\TrimStrings",
+      "file": "/Applications/XAMPP/xamppfiles/htdocs/closetapp/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php",
+      "function": "handle",
+      "line": 167,
+      "type": "->"
+    },
+    {
+      "class": "Illuminate\\Pipeline\\Pipeline",
+      "file": "/Applications/XAMPP/xamppfiles/htdocs/closetapp/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/ValidatePostSize.php",
+      "function": "Illuminate\\Pipeline\\{closure}",
+      "line": 27,
+      "type": "->"
+    },
+    {
+      "class": "Illuminate\\Foundation\\Http\\Middleware\\ValidatePostSize",
+      "file": "/Applications/XAMPP/xamppfiles/htdocs/closetapp/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php",
+      "function": "handle",
+      "line": 167,
+      "type": "->"
+    },
+    {
+      "class": "Illuminate\\Pipeline\\Pipeline",
+      "file": "/Applications/XAMPP/xamppfiles/htdocs/closetapp/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/PreventRequestsDuringMaintenance.php",
+      "function": "Illuminate\\Pipeline\\{closure}",
+      "line": 86,
+      "type": "->"
+    },
+    {
+      "class": "Illuminate\\Foundation\\Http\\Middleware\\PreventRequestsDuringMaintenance",
+      "file": "/Applications/XAMPP/xamppfiles/htdocs/closetapp/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php",
+      "function": "handle",
+      "line": 167,
+      "type": "->"
+    },
+    {
+      "class": "Illuminate\\Pipeline\\Pipeline",
+      "file": "/Applications/XAMPP/xamppfiles/htdocs/closetapp/vendor/fruitcake/laravel-cors/src/HandleCors.php",
+      "function": "Illuminate\\Pipeline\\{closure}",
+      "line": 52,
+      "type": "->"
+    },
+    {
+      "class": "Fruitcake\\Cors\\HandleCors",
+      "file": "/Applications/XAMPP/xamppfiles/htdocs/closetapp/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php",
+      "function": "handle",
+      "line": 167,
+      "type": "->"
+    },
+    {
+      "class": "Illuminate\\Pipeline\\Pipeline",
+      "file": "/Applications/XAMPP/xamppfiles/htdocs/closetapp/vendor/laravel/framework/src/Illuminate/Http/Middleware/TrustProxies.php",
+      "function": "Illuminate\\Pipeline\\{closure}",
+      "line": 39,
+      "type": "->"
+    },
+    {
+      "class": "Illuminate\\Http\\Middleware\\TrustProxies",
+      "file": "/Applications/XAMPP/xamppfiles/htdocs/closetapp/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php",
+      "function": "handle",
+      "line": 167,
+      "type": "->"
+    },
+    {
+      "class": "Illuminate\\Pipeline\\Pipeline",
+      "file": "/Applications/XAMPP/xamppfiles/htdocs/closetapp/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php",
+      "function": "Illuminate\\Pipeline\\{closure}",
+      "line": 103,
+      "type": "->"
+    },
+    {
+      "class": "Illuminate\\Pipeline\\Pipeline",
+      "file": "/Applications/XAMPP/xamppfiles/htdocs/closetapp/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php",
+      "function": "then",
+      "line": 142,
+      "type": "->"
+    },
+    {
+      "class": "Illuminate\\Foundation\\Http\\Kernel",
+      "file": "/Applications/XAMPP/xamppfiles/htdocs/closetapp/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php",
+      "function": "sendRequestThroughRouter",
+      "line": 111,
+      "type": "->"
+    },
+    {
+      "class": "Illuminate\\Foundation\\Http\\Kernel",
+      "file": "/Applications/XAMPP/xamppfiles/htdocs/closetapp/public/index.php",
+      "function": "handle",
+      "line": 52,
+      "type": "->"
+    },
+    {
+      "file": "/Applications/XAMPP/xamppfiles/htdocs/closetapp/server.php",
+      "function": "require_once",
+      "line": 21
+    }
+  ]
+}

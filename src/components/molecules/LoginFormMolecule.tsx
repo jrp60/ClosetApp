@@ -3,13 +3,15 @@ import {TextInput, StyleSheet} from 'react-native';
 import TextInputComponent from '../atoms/TextInputComponent';
 import ButtonComponent from '../atoms/ButtonComponent';
 
-const LoginFormMolecule = props => {
+const LoginFormMolecule = ({...props}) => {
   return (
     <>
       <TextInputComponent
         placeholder="Username"
         onChangeText={props.onChangeTextUser}
         value={props.userValue}
+        autoCapitalize="none"
+        autoCorrect={false}
         {...props}
       />
       <TextInputComponent
@@ -17,6 +19,7 @@ const LoginFormMolecule = props => {
         secureTextEntry={true}
         onChangeText={props.onChangeTextPass}
         value={props.passValue}
+        autoCapitalize="none"
         {...props}
       />
       <ButtonComponent

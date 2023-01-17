@@ -1,8 +1,8 @@
-const uri = 'http://localhost:8000';
+import {BASE_API_URL} from '@env';
 
 const fetchOutfits = async () => {
   try {
-    const response = fetch(uri + '/api/outfits');
+    const response = fetch(BASE_API_URL + 'outfits');
 
     const data = (await response).json();
     //console.log('DATA: ' + JSON.stringify(data, null, 2));

@@ -3,7 +3,6 @@ import HelloWorldScreen from '../components/screens/HelloWorldScreen';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {NavigationContainer, DefaultTheme} from '@react-navigation/native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import {SafeAreaView} from 'react-native-safe-area-context';
 import DisplayScreen from '../components/screens/DisplayScreen';
 import CameraScreen from '../components/screens/CameraScreen';
 import Ionicons from 'react-native-vector-icons/Ionicons';
@@ -64,7 +63,7 @@ function MyTabs() {
           tabBarLabel: 'Login',
           headerShown: false,
           tabBarIcon: ({color, size}) => (
-            <Ionicons name="user" size={28} color={color} />
+            <Ionicons name="person" size={28} color={color} />
           ),
         }}
       />
