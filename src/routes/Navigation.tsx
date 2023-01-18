@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import HelloWorldScreen from '../components/screens/HelloWorldScreen';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {NavigationContainer, DefaultTheme} from '@react-navigation/native';
@@ -12,6 +12,7 @@ import {Provider} from 'react-redux';
 import {store} from '../store/store';
 import LoginScreen from '../components/screens/LoginScreen';
 import SignUpScreen from '../components/screens/SignUpScreen';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Stack = createNativeStackNavigator();
 const MyTheme = {
@@ -27,6 +28,10 @@ const MyTheme = {
 const Tab = createBottomTabNavigator();
 
 function MyTabs() {
+  useEffect(() => {
+    //AsyncStorage.removeItem('user');
+  }, []);
+
   return (
     <Tab.Navigator
       screenOptions={{
@@ -36,10 +41,10 @@ function MyTabs() {
         headerStyle: {backgroundColor: Colors.background},
       }}>
       <Tab.Screen
-        name="HelloWorldScreen"
-        component={HelloWorldScreen}
+        name="Outfits"
+        component={DisplayScreen}
         options={{
-          tabBarLabel: 'Home',
+          tabBarLabel: 'Outfits',
 
           tabBarIcon: ({color}) => (
             <Ionicons name="shirt" size={28} color={color} />
@@ -68,7 +73,7 @@ function MyTabs() {
           ),
         }}
       />
-      <Tab.Screen name="Settings" component={DisplayScreen} />
+      <Tab.Screen name="testing" component={HelloWorldScreen} />
     </Tab.Navigator>
   );
 }
@@ -79,7 +84,7 @@ function Navigation() {
       <NavigationContainer theme={MyTheme}>
         {/* <SafeAreaView> */}
         <Stack.Navigator
-          initialRouteName="MyTabs"
+          initialRouteName="Login"
           screenOptions={{
             headerShown: false,
           }}>

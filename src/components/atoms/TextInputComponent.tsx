@@ -3,8 +3,6 @@ import {StyleSheet, TextInput} from 'react-native';
 import Colors from '../styles/colors';
 
 const TextInputComponent = ({...props}) => {
-  console.log('textinput value: ', props.value);
-
   return <TextInput {...props} style={[styles.input, props.style]} />;
 };
 

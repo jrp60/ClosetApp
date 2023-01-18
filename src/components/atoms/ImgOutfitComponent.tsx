@@ -5,8 +5,6 @@ const ImgOutfitComponent = ({urlImage}) => {
   const windowWidth = Dimensions.get('window').width;
 
   const scaleHeight = ({source, desiredWidth}) => {
-    console.log('source: ', source);
-
     //const {width, height} = Image.resolveAssetSource(source);
     let ratio = 1 / 1;
     if (ratio < 0.7) {

@@ -15,97 +15,45 @@ const DisplayScreen = () => {
   const count = useSelector((state: RootState) => state.likeCounter.value);
   const [outfits, setOutfits] = useState();
   const [displayOutfits, setDisplayOutfits] = useState(false);
-  const [token, setToken] = useState<String>('');
+  // const [token, setToken] = useState<String>('');
+  const tokenStore = useSelector((state: RootState) => state.token.token);
   const dispatch = useDispatch();
   const like = () => {
     console.log('like');
     console.log('counter before: ' + count);
-
     dispatch(increment());
     console.log('counter now: ', count);
   };
 
-  // It works, but im doing 2 calls separately in useEffect
-  const loadTokenAndOutfits2 = async () => {
-    try {
-      const user2 = await AsyncStorage.getItem('user');
-      console.log('myFunction: token2: ' + user2);
-      if (user2 !== null) {
-        const token2 = JSON.parse(user2).token;
-        const response = await fetch(`${BASE_API_URL}outfits`, {
-          method: 'GET',
-          headers: {
-            Accept: 'application/json',
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${token2}`,
-          },
-        });
-        const data = await response.json();
-        console.log('myFunction: data: ' + JSON.stringify(data));
-        setOutfits(data);
-        setDisplayOutfits(true);
-      }
-    } catch (error) {
-      console.log('myFunction: Error in display screen: ' + error.message);
-    }
-  };
-
-  const loadToken = async () => {
-    try {
-      const user = await AsyncStorage.getItem('user');
-      console.log('loadToken: token: ' + user);
-      if (user !== null) {
-        const token2: String = JSON.parse(user).token;
-        console.log('loadToken: token: ' + token2);
-        console.log('token state: ' + token);
-
-        setToken(token2);
-        console.log('token state after: ' + token);
-      }
-    } catch (error) {
-      console.log('loadToken: Error in display screen: ' + error.message);
-    }
-  };
-
   const loadOutfits = async () => {
     try {
-      console.log('loadOutfits: token: ' + token);
-
       const response = await fetch(`${BASE_API_URL}outfits`, {
         method: 'GET',
         headers: {
           Accept: 'application/json',
           'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`,
+          Authorization: `Bearer ${tokenStore}`,
         },
       });
+      if (response.status == 401) {
+        console.log('loadOutfits: token expired');
+        return;
+      }
+
       const data = await response.json();
-      setOutfits(data);
-      setDisplayOutfits(true);
+
+      if (data.length != 0) {
+        setOutfits(data);
+        setDisplayOutfits(true);
+      }
     } catch (error) {
       console.log('loadOutfits: Error in display screen: ' + error.message);
     }
   };
 
-  const loadTokenAndOutfits = async () => {
-    try {
-      await loadToken();
-      await loadOutfits();
-    } catch (error) {
-      console.log(
-        'loadTokenAndOutfits: Error in display screen: ' + error.message,
-      );
-    }
-  };
-
   useEffect(() => {
-    console.log('useEffect');
-    loadToken();
-    console.log('token state: ' + token);
-    if (token != '') {
-      loadOutfits();
-    }
-  }, [token]);
+    loadOutfits();
+  }, []);
 
   const renderItem = ({item}) => (
     <OutfitMolecule onPress={like} item={item}></OutfitMolecule>
