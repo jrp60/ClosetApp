@@ -4,6 +4,13 @@ import LoginFormMolecule from '../molecules/LoginFormMolecule';
 import ButtonComponent from '../atoms/ButtonComponent';
 import {BASE_API_URL} from '@env';
 //import * as SecureStore from 'expo-secure-store';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
+//TODO - Add remember me(locally) field
+//TODO - If checked remember me, save it in asyncstorage
+//TODO - first of all, try to get user from asyncstorage, if remebmer me is true and user is not null
+//TODO - do the login automatically and go to home screen
+//TODO - if remember me is false, go to login screen
 
 const LoginScreen = ({navigation}) => {
   const [user, setUser] = useState('');
@@ -20,6 +27,23 @@ const LoginScreen = ({navigation}) => {
   //TODO - Implementar
   const forgotPassword = () => {
     alert('Forgot password');
+  };
+
+  const storeData = async value => {
+    try {
+      const jsonValue = JSON.stringify(value);
+      await AsyncStorage.setItem('@storage_Key', jsonValue);
+    } catch (e) {
+      // saving error
+    }
+  };
+
+  const storeUserAsync = async user => {
+    try {
+      await AsyncStorage.setItem('user', JSON.stringify(user));
+    } catch (error) {
+      console.log('Error saving data', error);
+    }
   };
 
   const doUserLogin = async () => {
@@ -54,6 +78,15 @@ const LoginScreen = ({navigation}) => {
           console.log('userWithToken: ' + JSON.stringify(userWithToken));
 
           //SecureStore.setItemAsync('user', JSON.stringify(userWithToken));
+          //AsyncStorage.setItem('user', JSON.stringify(userWithToken));
+          storeUserAsync(userWithToken)
+            .then(() => {
+              console.log('User saved');
+              navigation.navigate('DisplayScreen');
+            })
+            .catch(error => {
+              console.log('Error saving user', error);
+            });
           //navigation.navigate('DisplayScreen');
           console.log('Message 2: ' + response.data.message);
           console.log('status 2: ' + response.status);
