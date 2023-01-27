@@ -81,10 +81,10 @@ const LoginScreen = ({navigation}) => {
             const log = storeUserAsync(userWithToken);
             console.log('log: ' + log);
           }
-          //Save token in redux
+          //Save token with redux
           dispatch(setToken(response.data.token));
 
-          navigation.navigate('MyTabs');
+          navigation.navigate('MyTabsHome');
         } else {
           alert('Error');
           console.log('Error: ' + response.message);
@@ -134,7 +134,7 @@ const LoginScreen = ({navigation}) => {
 
       <ButtonComponent
         onPress={() => navigation.navigate('SignUp')}
-        text="¿No tienes cuenta? Crear una"
+        text="Sign Up"
         style={styles.signUp}
         type="tertiary"
       />

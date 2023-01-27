@@ -27,7 +27,7 @@ const MyTheme = {
 
 const Tab = createBottomTabNavigator();
 
-function MyTabs() {
+function MyTabsHome() {
   useEffect(() => {
     //AsyncStorage.removeItem('user');
   }, []);
@@ -88,7 +88,7 @@ function Navigation() {
           screenOptions={{
             headerShown: false,
           }}>
-          <Stack.Screen name="MyTabs" component={MyTabs} />
+          <Stack.Screen name="MyTabsHome" component={MyTabsHome} />
           <Stack.Screen name="HelloWorldScreen" component={HelloWorldScreen} />
           <Stack.Screen name="DisplayScreen" component={DisplayScreen} />
           <Stack.Screen name="CameraScreen" component={CameraScreen} />

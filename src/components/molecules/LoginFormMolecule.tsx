@@ -11,7 +11,7 @@ const LoginFormMolecule = ({...props}) => {
   return (
     <>
       <TextInputComponent
-        placeholder="Username"
+        placeholder="Email"
         onChangeText={props.onChangeTextUser}
         value={props.userValue}
         autoCapitalize="none"
@@ -48,7 +48,7 @@ const LoginFormMolecule = ({...props}) => {
 
       <ButtonComponent
         onPress={props.forgotPassword}
-        text="Recordar contraseña"
+        text="Remind Password"
         style={styles.btnRemind}
         type="tertiary"
       />
