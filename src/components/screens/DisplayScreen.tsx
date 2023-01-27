@@ -8,41 +8,52 @@ import fetchOutfits from '../../services/FetchOutfits';
 import TextComponent from '../atoms/TextComponent';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import Colors from '../styles/colors';
+import {BASE_API_URL} from '@env';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const DisplayScreen = () => {
   const count = useSelector((state: RootState) => state.likeCounter.value);
   const [outfits, setOutfits] = useState();
   const [displayOutfits, setDisplayOutfits] = useState(false);
+  // const [token, setToken] = useState<String>('');
+  const tokenStore = useSelector((state: RootState) => state.token.token);
   const dispatch = useDispatch();
   const like = () => {
     console.log('like');
     console.log('counter before: ' + count);
-
     dispatch(increment());
     console.log('counter now: ', count);
   };
 
-  useEffect(() => {
-    console.log('useEffect');
-    fetchOutfits()
-      //.then(data => data.json())
-      .then(data => {
-        //console.log('DATA in display: ' + data);
-        console.log('First then');
+  const loadOutfits = async () => {
+    try {
+      const response = await fetch(`${BASE_API_URL}outfits`, {
+        method: 'GET',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${tokenStore}`,
+        },
+      });
+      if (response.status == 401) {
+        console.log('loadOutfits: token expired');
+        return;
+      }
 
+      const data = await response.json();
+
+      if (data.length != 0) {
         setOutfits(data);
         setDisplayOutfits(true);
-      })
-      .catch(error => {
-        console.log('Error in display screen: ' + error.message);
-        setDisplayOutfits(false);
-      });
+      }
+    } catch (error) {
+      console.log('loadOutfits: Error in display screen: ' + error.message);
+    }
+  };
+
+  useEffect(() => {
+    loadOutfits();
   }, []);
-
-  console.log('display outfits: ' + displayOutfits);
-
-  // console.log('New DATA: ' + outfits);
-  // console.log('NEW DATA:', JSON.stringify(outfits, null, 2));
 
   const renderItem = ({item}) => (
     <OutfitMolecule onPress={like} item={item}></OutfitMolecule>

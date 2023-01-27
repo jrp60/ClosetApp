@@ -1,13 +1,19 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {View, StyleSheet, Image} from 'react-native';
 import LoginFormMolecule from '../molecules/LoginFormMolecule';
 import ButtonComponent from '../atoms/ButtonComponent';
 import {BASE_API_URL} from '@env';
-//import * as SecureStore from 'expo-secure-store';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import {setToken} from '../../store/tokenSlice';
+import {useDispatch, useSelector} from 'react-redux';
+import type {RootState} from '../../store/store';
 
 const LoginScreen = ({navigation}) => {
   const [user, setUser] = useState('');
   const [password, setPassword] = useState('');
+  const [remindMeCheck, setRemindMeCheck] = useState(false);
+  const dispatch = useDispatch();
+  const tokenStore = useSelector((state: RootState) => state.token);
 
   const validateUser = () => {
     if (user !== '' && password !== '') {
@@ -22,11 +28,30 @@ const LoginScreen = ({navigation}) => {
     alert('Forgot password');
   };
 
+  const storeUserAsync = async user => {
+    try {
+      await AsyncStorage.setItem('user', JSON.stringify(user));
+      console.log('Data successfully saved');
+      return true;
+    } catch (error) {
+      console.log('Error saving data', error);
+      return false;
+    }
+  };
+
+  /**
+   * Login user
+   * @returns {Promise<void>}
+   * @constructor
+   *
+   * Firs take user and password from inputs, then call API to login user
+   * If user and password are correct, then save user in async storage (if remind me is checked) and token in redux
+   * Then navigate to MyTabs screen
+   */
   const doUserLogin = async () => {
     const usernameValue = user;
     const passwordValue = password;
 
-    //was 'await' instead of 'return'
     await fetch(`${BASE_API_URL}login`, {
       method: 'POST',
       headers: {
@@ -46,28 +71,47 @@ const LoginScreen = ({navigation}) => {
         console.log('responseJson :', response);
 
         if (response.status == 200) {
-          //TODO - not sure if is data.user (change in laravel to fix it)
           const userWithToken = {
             ...response.data.user,
             token: response.data.token,
           };
-          console.log('userWithToken: ' + JSON.stringify(userWithToken));
 
-          //SecureStore.setItemAsync('user', JSON.stringify(userWithToken));
-          //navigation.navigate('DisplayScreen');
-          console.log('Message 2: ' + response.data.message);
-          console.log('status 2: ' + response.status);
-          console.log('user 2: ' + JSON.stringify(response.data.user));
+          //Save user in async storage
+          if (remindMeCheck) {
+            const log = storeUserAsync(userWithToken);
+            console.log('log: ' + log);
+          }
+          //Save token with redux
+          dispatch(setToken(response.data.token));
+
+          navigation.navigate('MyTabsHome');
         } else {
           alert('Error');
           console.log('Error: ' + response.message);
-          console.log('Response status: ' + response.status);
         }
       })
       .catch(error => {
         console.error(error);
       });
   };
+
+  const loadUserStorage = async () => {
+    try {
+      const userStorage = await AsyncStorage.getItem('user');
+      console.log('loadUser: ' + userStorage);
+      if (userStorage !== null) {
+        const tokenUser: string = JSON.parse(userStorage).token;
+        dispatch(setToken(tokenUser));
+        navigation.navigate('MyTabs');
+      }
+    } catch (error) {
+      console.log('loadToken: Error in display screen: ' + error.message);
+    }
+  };
+
+  useEffect(() => {
+    loadUserStorage();
+  }, []);
 
   return (
     <View style={styles.container}>
@@ -84,14 +128,15 @@ const LoginScreen = ({navigation}) => {
         passValue={password}
         validateUser={validateUser}
         forgotPassword={forgotPassword}
+        remindMeCheck={remindMeCheck}
+        setRemindMeCheck={setRemindMeCheck}
       />
 
       <ButtonComponent
         onPress={() => navigation.navigate('SignUp')}
-        text="¿No tienes cuenta? Crear una"
+        text="Sign Up"
         style={styles.signUp}
         type="tertiary"
-        //style={{width: '100%'}}
       />
     </View>
   );
