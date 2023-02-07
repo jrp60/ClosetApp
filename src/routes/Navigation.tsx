@@ -13,6 +13,7 @@ import {store} from '../store/store';
 import LoginScreen from '../components/screens/LoginScreen';
 import SignUpScreen from '../components/screens/SignUpScreen';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import AccountScreen from '../components/screens/AccountScreen';
 
 const Stack = createNativeStackNavigator();
 const MyTheme = {
@@ -67,6 +68,17 @@ function MyTabsHome() {
         component={LoginScreen}
         options={{
           tabBarLabel: 'Login',
+          headerShown: false,
+          tabBarIcon: ({color, size}) => (
+            <Ionicons name="person" size={28} color={color} />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="Account"
+        component={AccountScreen}
+        options={{
+          tabBarLabel: 'Account',
           headerShown: false,
           tabBarIcon: ({color, size}) => (
             <Ionicons name="person" size={28} color={color} />

@@ -5,18 +5,20 @@ import ButtonComponent from '../atoms/ButtonComponent';
 import {BASE_API_URL} from '@env';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {setToken} from '../../store/tokenSlice';
+import {setUser} from '../../store/userSlice';
 import {useDispatch, useSelector} from 'react-redux';
 import type {RootState} from '../../store/store';
+import {User} from '../../store/userSlice';
 
 const LoginScreen = ({navigation}) => {
-  const [user, setUser] = useState('');
+  const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [remindMeCheck, setRemindMeCheck] = useState(false);
   const dispatch = useDispatch();
   const tokenStore = useSelector((state: RootState) => state.token);
 
   const validateUser = () => {
-    if (user !== '' && password !== '') {
+    if (username !== '' && password !== '') {
       doUserLogin();
     } else {
       alert('Insert user and password');
@@ -49,7 +51,7 @@ const LoginScreen = ({navigation}) => {
    * Then navigate to MyTabs screen
    */
   const doUserLogin = async () => {
-    const usernameValue = user;
+    const usernameValue = username;
     const passwordValue = password;
 
     await fetch(`${BASE_API_URL}login`, {
@@ -71,16 +73,22 @@ const LoginScreen = ({navigation}) => {
         console.log('responseJson :', response);
 
         if (response.status == 200) {
-          const userWithToken = {
+          const userState: User = {
             ...response.data.user,
             token: response.data.token,
           };
 
           //Save user in async storage
           if (remindMeCheck) {
-            const log = storeUserAsync(userWithToken);
+            const log = storeUserAsync(userState);
             console.log('log: ' + log);
           }
+          //Save user with redux
+          dispatch(setUser(userState));
+
+          //const userStore = useSelector((state: RootState) => state.user);
+          //console.log('userStore: ' + userStore.user);
+
           //Save token with redux
           dispatch(setToken(response.data.token));
 
@@ -122,9 +130,9 @@ const LoginScreen = ({navigation}) => {
       />
       <LoginFormMolecule
         style={styles.loginForm}
-        onChangeTextUser={setUser}
+        onChangeTextUser={setUsername}
         onChangeTextPass={setPassword}
-        userValue={user}
+        userValue={username}
         passValue={password}
         validateUser={validateUser}
         forgotPassword={forgotPassword}

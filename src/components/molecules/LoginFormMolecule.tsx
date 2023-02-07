@@ -5,7 +5,7 @@ import ButtonComponent from '../atoms/ButtonComponent';
 import CheckBox from '@react-native-community/checkbox';
 import Colors from '../styles/colors';
 import TextComponent from '../atoms/TextComponent';
-import {type} from '../../store/store';
+import type {RootState} from '../../store/store';
 
 const LoginFormMolecule = ({...props}) => {
   return (
