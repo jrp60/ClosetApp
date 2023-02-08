@@ -64,7 +64,7 @@ function MyTabsHome() {
         }}
       />
       <Tab.Screen
-        name="Login"
+        name="Login2"
         component={LoginScreen}
         options={{
           tabBarLabel: 'Login',

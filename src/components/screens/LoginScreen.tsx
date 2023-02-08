@@ -69,28 +69,35 @@ const LoginScreen = ({navigation}) => {
       .then(response => {
         return response.json();
       })
-      .then(response => {
+      .then(async response => {
         console.log('responseJson :', response);
 
         if (response.status == 200) {
           const userState: User = {
             ...response.data.user,
             token: response.data.token,
+            remember_session: remindMeCheck,
           };
 
           //Save user in async storage
+          //TODO  add await?
           if (remindMeCheck) {
-            const log = storeUserAsync(userState);
+            const log = await storeUserAsync(userState).then(() => {
+              console.log('User saved in async storage');
+            });
             console.log('log: ' + log);
+            console.log(log);
           }
           //Save user with redux
           dispatch(setUser(userState));
 
-          //const userStore = useSelector((state: RootState) => state.user);
-          //console.log('userStore: ' + userStore.user);
-
           //Save token with redux
           dispatch(setToken(response.data.token));
+
+          //Clean inputs
+          setUsername('');
+          setPassword('');
+          setRemindMeCheck(false);
 
           navigation.navigate('MyTabsHome');
         } else {
@@ -109,8 +116,10 @@ const LoginScreen = ({navigation}) => {
       console.log('loadUser: ' + userStorage);
       if (userStorage !== null) {
         const tokenUser: string = JSON.parse(userStorage).token;
-        dispatch(setToken(tokenUser));
-        navigation.navigate('MyTabs');
+        //dispatch(setToken(tokenUser));
+        dispatch(setUser(JSON.parse(userStorage)));
+        //TODO - dispatch user to store
+        navigation.navigate('MyTabsHome');
       }
     } catch (error) {
       console.log('loadToken: Error in display screen: ' + error.message);
@@ -119,6 +128,7 @@ const LoginScreen = ({navigation}) => {
 
   useEffect(() => {
     loadUserStorage();
+    console.log('username: ' + username);
   }, []);
 
   return (

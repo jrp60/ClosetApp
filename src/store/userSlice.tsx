@@ -13,6 +13,7 @@ export interface User {
   name: string;
   created_at: string;
   updated_at: string;
+  remember_session: boolean;
 }
 
 const initialState: UserState = {
@@ -23,6 +24,7 @@ const initialState: UserState = {
     name: '',
     created_at: '',
     updated_at: '',
+    remember_session: false,
   },
 };
 
@@ -33,9 +35,12 @@ export const userSlice = createSlice({
     setUser: (state, action: PayloadAction<User>) => {
       state.user = action.payload;
     },
+    clearUser: state => {
+      state.user = initialState.user;
+    },
   },
 });
 
-export const {setUser} = userSlice.actions;
+export const {setUser, clearUser} = userSlice.actions;
 
 export default userSlice.reducer;

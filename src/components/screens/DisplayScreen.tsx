@@ -16,7 +16,9 @@ const DisplayScreen = () => {
   const [outfits, setOutfits] = useState();
   const [displayOutfits, setDisplayOutfits] = useState(false);
   // const [token, setToken] = useState<String>('');
-  const tokenStore = useSelector((state: RootState) => state.token.token);
+  //const tokenStore = useSelector((state: RootState) => state.token.token);
+  const userStore = useSelector((state: RootState) => state.user.user);
+  const token = userStore.token;
   const dispatch = useDispatch();
   const like = () => {
     console.log('like');
@@ -32,7 +34,7 @@ const DisplayScreen = () => {
         headers: {
           Accept: 'application/json',
           'Content-Type': 'application/json',
-          Authorization: `Bearer ${tokenStore}`,
+          Authorization: `Bearer ${token}`,
         },
       });
       if (response.status == 401) {
