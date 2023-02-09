@@ -3,7 +3,7 @@ import likeCounterReducer from './likeCounterSlice';
 import tokenReducer from './tokenSlice';
 import userReducer from './userSlice';
 
-export const store = configureStore({
+const store = configureStore({
   reducer: {
     likeCounter: likeCounterReducer,
     token: tokenReducer,
@@ -13,3 +13,4 @@ export const store = configureStore({
 
 export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;
+export default store;

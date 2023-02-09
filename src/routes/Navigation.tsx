@@ -9,7 +9,7 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import {Colors} from '../components/styles';
 
 import {Provider} from 'react-redux';
-import {store} from '../store/store';
+import store from '../store/store';
 import LoginScreen from '../components/screens/LoginScreen';
 import SignUpScreen from '../components/screens/SignUpScreen';
 import AsyncStorage from '@react-native-async-storage/async-storage';

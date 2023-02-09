@@ -10,7 +10,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import type {RootState} from '../../store/store';
 import {User} from '../../store/userSlice';
 
-const LoginScreen = ({navigation}) => {
+const LoginScreen = ({navigation}: any) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [remindMeCheck, setRemindMeCheck] = useState(false);
@@ -30,7 +30,7 @@ const LoginScreen = ({navigation}) => {
     alert('Forgot password');
   };
 
-  const storeUserAsync = async user => {
+  const storeUserAsync = async (user: User) => {
     try {
       await AsyncStorage.setItem('user', JSON.stringify(user));
       console.log('Data successfully saved');
@@ -121,7 +121,7 @@ const LoginScreen = ({navigation}) => {
         //TODO - dispatch user to store
         navigation.navigate('MyTabsHome');
       }
-    } catch (error) {
+    } catch (error: any) {
       console.log('loadToken: Error in display screen: ' + error.message);
     }
   };

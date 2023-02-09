@@ -9,14 +9,11 @@ import TextComponent from '../atoms/TextComponent';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import Colors from '../styles/colors';
 import {BASE_API_URL} from '@env';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const DisplayScreen = () => {
   const count = useSelector((state: RootState) => state.likeCounter.value);
   const [outfits, setOutfits] = useState();
   const [displayOutfits, setDisplayOutfits] = useState(false);
-  // const [token, setToken] = useState<String>('');
-  //const tokenStore = useSelector((state: RootState) => state.token.token);
   const userStore = useSelector((state: RootState) => state.user.user);
   const token = userStore.token;
   const dispatch = useDispatch();
@@ -43,12 +40,11 @@ const DisplayScreen = () => {
       }
 
       const data = await response.json();
-
       if (data.length != 0) {
         setOutfits(data);
         setDisplayOutfits(true);
       }
-    } catch (error) {
+    } catch (error: any) {
       console.log('loadOutfits: Error in display screen: ' + error.message);
     }
   };
@@ -57,7 +53,7 @@ const DisplayScreen = () => {
     loadOutfits();
   }, []);
 
-  const renderItem = ({item}) => (
+  const renderItem = ({item}: {item: any}) => (
     <OutfitMolecule onPress={like} item={item}></OutfitMolecule>
   );
 

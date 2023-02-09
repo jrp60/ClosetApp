@@ -1,7 +1,8 @@
 import React from 'react';
-import {View, Text, StyleSheet, Button} from 'react-native';
+import {View, Text, StyleSheet, Button, Platform} from 'react-native';
 
 import {
+  Asset,
   CameraOptions,
   ImageLibraryOptions,
   launchCamera,
@@ -9,9 +10,15 @@ import {
 } from 'react-native-image-picker';
 import ButtonComponent from '../atoms/ButtonComponent';
 import RNFS from 'react-native-fs';
+import {BASE_API_URL} from '@env';
+import {useSelector} from 'react-redux';
+import {RootState} from '../../store/store';
 
 const CameraScreen = () => {
   const [hasPermission, setHasPermission] = React.useState(null);
+
+  const user = useSelector((state: RootState) => state.user.user);
+  const token = user.token;
 
   // React.useEffect(() => {
   //   (async () => {
@@ -38,8 +45,8 @@ const CameraScreen = () => {
     console.log('Response = ', response);
   };
 
-  const optionsPicker = {
-    type: 'jpg,png,jpeg',
+  const optionsPicker: ImageLibraryOptions = {
+    mediaType: 'photo',
   };
 
   const picker = async () => {
@@ -52,16 +59,69 @@ const CameraScreen = () => {
       console.log('ImagePicker Error: ', response.errorMessage);
     }
     if (response.assets) {
-      const imageUri = response.assets[0].uri;
-      //TODO Change Path to save
-      const folderPath = '../../../../assets/images';
-      console.log('ImageUri: ', imageUri);
-
-      saveImage(imageUri, folderPath);
+      await postImage(response.assets[0]);
+      //await saveImage(imageUri, folderPath);
     }
   };
 
-  const saveImage = async (imageUri, folderPath) => {
+  const postImage = async (selectedImage: Asset) => {
+    const initialUri = selectedImage.uri!;
+    console.log('initialUri: ', initialUri);
+
+    const uri =
+      Platform.OS === 'ios' ? initialUri.replace('file://', '') : initialUri;
+
+    console.log('uri: ', uri);
+
+    const filename = initialUri.split('/').pop();
+    const match = /\.(\w+)$/.exec(filename as string);
+    const ext = match?.[1];
+    const type = match ? `image/${match[1]}` : `image`;
+
+    var formData = new FormData();
+    formData.append('imageBin', {
+      uri,
+      type,
+      name: `image.${ext}`,
+    } as any);
+    formData.append('name', 'test');
+    formData.append('description', 'test');
+    formData.append('price', '100');
+    formData.append('category', 'test');
+    formData.append('size', 'S');
+    formData.append('color', 'blueblue');
+    //formData.append('image', 'test');
+    formData.append('likes', '2');
+
+    await fetch(`${BASE_API_URL}outfits`, {
+      method: 'POST',
+      headers: {
+        //Accept: 'multipart/form-data',
+        'Content-Type': 'multipart/form-data',
+        Authorization: `Bearer ${token}`,
+      },
+      body: formData,
+    })
+      .then(response => {
+        return response.json();
+      })
+      .then(async response => {
+        console.log('responseJson :', response);
+
+        if (response.status == 200) {
+          console.log('Image saved');
+          console.log('Response: ' + response.message);
+        } else {
+          alert('Error');
+          console.log('Error: ' + response.message);
+        }
+      })
+      .catch(error => {
+        console.error(error);
+      });
+  };
+
+  const saveImage = async (imageUri: string, folderPath: any) => {
     console.log('Saving image');
 
     const fileName = imageUri.split('/').pop();
@@ -71,8 +131,10 @@ const CameraScreen = () => {
 
     try {
       await RNFS.mkdir(`${RNFS.DocumentDirectoryPath}/${folderPath}`);
+      console.log(`${RNFS.DocumentDirectoryPath}/${folderPath}`);
+
       console.log('Image save to: ', destinationPath);
-    } catch (err) {
+    } catch (err: any) {
       console.log(err.message);
     }
   };

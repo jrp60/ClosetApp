@@ -9,13 +9,12 @@ import {setToken} from '../../store/tokenSlice';
 import {useDispatch, useSelector} from 'react-redux';
 import type {RootState} from '../../store/store';
 
-const SignUpScreen = ({navigation}) => {
+const SignUpScreen = ({navigation}: any) => {
   const [user, setUser] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [passwordConfirm, setPasswordConfirm] = useState('');
   const dispatch = useDispatch();
-  const tokenStore = useSelector((state: RootState) => state.token);
 
   const validatePassword = () => {
     if (password !== passwordConfirm) {
@@ -25,7 +24,7 @@ const SignUpScreen = ({navigation}) => {
     }
   };
 
-  const validateEmail = text => {
+  const validateEmail = (text: string) => {
     let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w\w+)+$/;
     if (reg.test(text) === false) {
       console.log('Email is Not Correct');
@@ -68,6 +67,7 @@ const SignUpScreen = ({navigation}) => {
         if (responseJson.status == 200) {
           console.log('Usuario registrado');
           //Save token with redux
+          //TODO - save user instead, with redux
           dispatch(setToken(responseJson.data.token));
           navigation.navigate('MyTabsHome');
         } else {

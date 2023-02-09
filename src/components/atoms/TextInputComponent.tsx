@@ -2,7 +2,7 @@ import React from 'react';
 import {StyleSheet, TextInput} from 'react-native';
 import Colors from '../styles/colors';
 
-const TextInputComponent = ({...props}) => {
+const TextInputComponent = (props: any) => {
   return <TextInput {...props} style={[styles.input, props.style]} />;
 };
 

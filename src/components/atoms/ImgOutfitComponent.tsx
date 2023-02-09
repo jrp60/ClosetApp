@@ -1,10 +1,10 @@
 import React, {useState} from 'react';
 import {StyleSheet, ImageBackground, Dimensions} from 'react-native';
 
-const ImgOutfitComponent = ({urlImage}) => {
+const ImgOutfitComponent = ({urlImage}: {urlImage: string}) => {
   const windowWidth = Dimensions.get('window').width;
 
-  const scaleHeight = ({source, desiredWidth}) => {
+  const scaleHeight = ({desiredWidth}: {desiredWidth: number}) => {
     //const {width, height} = Image.resolveAssetSource(source);
     let ratio = 1 / 1;
     if (ratio < 0.7) {
@@ -15,7 +15,6 @@ const ImgOutfitComponent = ({urlImage}) => {
   };
 
   const imageHeight = scaleHeight({
-    source: urlImage,
     desiredWidth: windowWidth,
   });
 
@@ -27,6 +26,7 @@ const ImgOutfitComponent = ({urlImage}) => {
         width: '100%',
       }}
       resizeMode="contain"
+      //source = {{uri: 'data:image/jpeg;base64,' + urlImage}}
       source={{uri: urlImage}}></ImageBackground>
   );
 };

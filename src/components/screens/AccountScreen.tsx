@@ -8,7 +8,7 @@ import {RootState} from '../../store/store';
 import {clearUser} from '../../store/userSlice';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const AccountScreen = ({navigation}) => {
+const AccountScreen = ({navigation}: any) => {
   const dispatch = useDispatch();
   const userStore = useSelector((state: RootState) => state.user);
   const logout = () => {

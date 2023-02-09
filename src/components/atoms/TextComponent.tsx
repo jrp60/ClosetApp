@@ -1,7 +1,7 @@
 import React from 'react';
 import {View, Text, StyleSheet} from 'react-native';
 
-const TextComponent = ({...props}) => {
+const TextComponent = (props: any) => {
   return (
     <View style={styles.textContainer}>
       <Text style={[styles[props.type], props.style]}>{props.children}</Text>
@@ -9,7 +9,7 @@ const TextComponent = ({...props}) => {
   );
 };
 
-const styles = StyleSheet.create({
+const styles: any = StyleSheet.create({
   title: {
     fontSize: 20,
     fontWeight: 'bold',
