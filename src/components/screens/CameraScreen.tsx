@@ -78,6 +78,9 @@ const CameraScreen = () => {
     const ext = match?.[1];
     const type = match ? `image/${match[1]}` : `image`;
 
+    console.log('type: ', type);
+    console.log('uri: ', uri);
+
     var formData = new FormData();
     formData.append('imageBin', {
       uri,
