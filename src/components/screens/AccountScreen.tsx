@@ -15,7 +15,9 @@ const AccountScreen = ({navigation}: any) => {
     console.log('Logout');
     AsyncStorage.removeItem('user');
     dispatch(clearUser());
-    navigation.navigate('Login');
+    //navigation.navigate('Login');
+    console.log('Logout');
+    console.log('UserStore: ' + userStore.user.name);
   };
 
   return (

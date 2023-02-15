@@ -1,7 +1,6 @@
 import React from 'react';
 import type {Node} from 'react';
 import {
-  //SafeAreaView,
   ScrollView,
   StatusBar,
   StyleSheet,
@@ -16,15 +15,13 @@ import {NavigationContainer, StackActions} from '@react-navigation/native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 
 import {Provider} from 'react-redux';
-import {store} from './src/store/store';
-//import store from './src/store/store';
+import store from './src/store/store';
 
 const App: () => Node = () => {
   return (
-    // <Provider store={store}>
-    //   <Navigation />;
-    // </Provider>
-    <Navigation />
+    <Provider store={store}>
+      <Navigation />
+    </Provider>
   );
 };
 

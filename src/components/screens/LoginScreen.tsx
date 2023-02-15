@@ -99,7 +99,7 @@ const LoginScreen = ({navigation}: any) => {
           setPassword('');
           setRemindMeCheck(false);
 
-          navigation.navigate('MyTabsHome');
+          //navigation.navigate('MyTabsHome');
         } else {
           alert('Error');
           console.log('Error: ' + response.message);
@@ -110,22 +110,20 @@ const LoginScreen = ({navigation}: any) => {
       });
   };
 
+  //TODO - Delete this function and useEffect?
   const loadUserStorage = async () => {
     try {
       const userStorage = await AsyncStorage.getItem('user');
       console.log('loadUser: ' + userStorage);
       if (userStorage !== null) {
         const tokenUser: string = JSON.parse(userStorage).token;
-        //dispatch(setToken(tokenUser));
         dispatch(setUser(JSON.parse(userStorage)));
-        //TODO - dispatch user to store
         navigation.navigate('MyTabsHome');
       }
     } catch (error: any) {
       console.log('loadToken: Error in display screen: ' + error.message);
     }
   };
-
   useEffect(() => {
     loadUserStorage();
     console.log('username: ' + username);

@@ -8,12 +8,14 @@ import CameraScreen from '../components/screens/CameraScreen';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import {Colors} from '../components/styles';
 
-import {Provider} from 'react-redux';
-import store from '../store/store';
+import {Provider, useDispatch, useSelector} from 'react-redux';
+import store, {RootState} from '../store/store';
 import LoginScreen from '../components/screens/LoginScreen';
 import SignUpScreen from '../components/screens/SignUpScreen';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import AccountScreen from '../components/screens/AccountScreen';
+import {setUser} from '../store/userSlice';
+import {User} from '../store/userSlice';
 
 const Stack = createNativeStackNavigator();
 const MyTheme = {
@@ -29,10 +31,6 @@ const MyTheme = {
 const Tab = createBottomTabNavigator();
 
 function MyTabsHome() {
-  useEffect(() => {
-    //AsyncStorage.removeItem('user');
-  }, []);
-
   return (
     <Tab.Navigator
       screenOptions={{
@@ -53,7 +51,7 @@ function MyTabsHome() {
         }}
       />
       <Tab.Screen
-        name="Home"
+        name="Camera"
         component={CameraScreen}
         options={{
           tabBarLabel: 'Camera',
@@ -63,8 +61,8 @@ function MyTabsHome() {
           ),
         }}
       />
-      <Tab.Screen
-        name="Login2"
+      {/* <Tab.Screen
+        name="Login"
         component={LoginScreen}
         options={{
           tabBarLabel: 'Login',
@@ -73,7 +71,7 @@ function MyTabsHome() {
             <Ionicons name="person" size={28} color={color} />
           ),
         }}
-      />
+      /> */}
       <Tab.Screen
         name="Account"
         component={AccountScreen}
@@ -91,25 +89,55 @@ function MyTabsHome() {
 }
 
 function Navigation() {
+  const dispatch = useDispatch();
+  const loadUserStorage = async () => {
+    try {
+      const userStorage = await AsyncStorage.getItem('user');
+      console.log('loadUser: ' + userStorage);
+      if (userStorage !== null) {
+        const tokenUser: string = JSON.parse(userStorage).token;
+        dispatch(setUser(JSON.parse(userStorage)));
+      }
+    } catch (error: any) {
+      console.log('loadToken: Error in display screen: ' + error.message);
+    }
+  };
+
+  const InitialScreen = ({navigation}: any) => {
+    const userStore = useSelector((state: RootState) => state.user);
+    console.log('UserStore in initial Screen');
+    console.log(userStore);
+
+    return (
+      <>
+        {userStore.user.name == '' ? (
+          <LoginScreen navigation={navigation} />
+        ) : (
+          <MyTabsHome />
+        )}
+      </>
+    );
+  };
+  useEffect(() => {
+    loadUserStorage();
+    //AsyncStorage.removeItem('user');
+  }, []);
   return (
-    <Provider store={store}>
-      <NavigationContainer theme={MyTheme}>
-        {/* <SafeAreaView> */}
-        <Stack.Navigator
-          initialRouteName="Login"
-          screenOptions={{
-            headerShown: false,
-          }}>
-          <Stack.Screen name="MyTabsHome" component={MyTabsHome} />
-          <Stack.Screen name="HelloWorldScreen" component={HelloWorldScreen} />
-          <Stack.Screen name="DisplayScreen" component={DisplayScreen} />
-          <Stack.Screen name="CameraScreen" component={CameraScreen} />
-          <Stack.Screen name="Login" component={LoginScreen} />
-          <Stack.Screen name="SignUp" component={SignUpScreen} />
-        </Stack.Navigator>
-        {/* </SafeAreaView> */}
-      </NavigationContainer>
-    </Provider>
+    <NavigationContainer theme={MyTheme}>
+      <Stack.Navigator
+        initialRouteName="Home"
+        screenOptions={{
+          headerShown: false,
+        }}>
+        <Stack.Screen name="Home" component={InitialScreen} />
+        {/* <Stack.Screen name="MyTabsHome" component={MyTabsHome} /> */}
+        {/* <Stack.Screen name="HelloWorldScreen" component={HelloWorldScreen} />
+        <Stack.Screen name="DisplayScreen" component={DisplayScreen} /> */}
+        {/* <Stack.Screen name="CameraScreen" component={CameraScreen} /> */}
+        {/* <Stack.Screen name="Login" component={LoginScreen} /> */}
+        <Stack.Screen name="SignUp" component={SignUpScreen} />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
 
