@@ -8,7 +8,8 @@ import fetchOutfits from '../../services/FetchOutfits';
 import TextComponent from '../atoms/TextComponent';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import Colors from '../styles/colors';
-import {BASE_API_URL} from '@env';
+import {BASE_API_URL_IOS} from '@env';
+import {getOutfits} from '../../services/OutfitsService';
 
 const DisplayScreen = () => {
   const count = useSelector((state: RootState) => state.likeCounter.value);
@@ -26,7 +27,7 @@ const DisplayScreen = () => {
 
   const loadOutfits = async () => {
     try {
-      const response = await fetch(`${BASE_API_URL}outfits`, {
+      const response = await fetch(`${BASE_API_URL_IOS}outfits`, {
         method: 'GET',
         headers: {
           Accept: 'application/json',
@@ -46,11 +47,19 @@ const DisplayScreen = () => {
       }
     } catch (error: any) {
       console.log('loadOutfits: Error in display screen: ' + error.message);
+      console.log(error);
     }
   };
 
   useEffect(() => {
-    loadOutfits();
+    const fetchOut = async () => {
+      const outfits = await getOutfits(token);
+      if (outfits) {
+        setOutfits(outfits);
+        setDisplayOutfits(true);
+      }
+    };
+    fetchOut();
   }, []);
 
   const renderItem = ({item}: {item: any}) => (

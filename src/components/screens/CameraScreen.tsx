@@ -8,6 +8,7 @@ import {
   launchCamera,
   launchImageLibrary,
 } from 'react-native-image-picker';
+import ImagePicker from 'react-native-image-picker';
 import ButtonComponent from '../atoms/ButtonComponent';
 import RNFS from 'react-native-fs';
 import {BASE_API_URL} from '@env';
@@ -59,6 +60,9 @@ const CameraScreen = () => {
       console.log('ImagePicker Error: ', response.errorMessage);
     }
     if (response.assets) {
+      console.log('ImagePicker Response: ');
+      console.log(response);
+
       await postImage(response.assets[0]);
       //await saveImage(imageUri, folderPath);
     }
@@ -66,12 +70,9 @@ const CameraScreen = () => {
 
   const postImage = async (selectedImage: Asset) => {
     const initialUri = selectedImage.uri!;
-    console.log('initialUri: ', initialUri);
 
     const uri =
       Platform.OS === 'ios' ? initialUri.replace('file://', '') : initialUri;
-
-    console.log('uri: ', uri);
 
     const filename = initialUri.split('/').pop();
     const match = /\.(\w+)$/.exec(filename as string);
@@ -80,13 +81,16 @@ const CameraScreen = () => {
 
     console.log('type: ', type);
     console.log('uri: ', uri);
+    console.log('name: ', `image.${ext}`);
 
     var formData = new FormData();
     formData.append('imageBin', {
       uri,
       type,
       name: `image.${ext}`,
-    } as any);
+    });
+    //console.log('image bin :', formData.get('imageBin'));
+
     formData.append('name', 'test');
     formData.append('description', 'test');
     formData.append('price', '100');

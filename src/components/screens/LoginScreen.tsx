@@ -2,20 +2,18 @@ import React, {useEffect, useState} from 'react';
 import {View, StyleSheet, Image} from 'react-native';
 import LoginFormMolecule from '../molecules/LoginFormMolecule';
 import ButtonComponent from '../atoms/ButtonComponent';
-import {BASE_API_URL} from '@env';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {setToken} from '../../store/tokenSlice';
 import {setUser} from '../../store/userSlice';
 import {useDispatch, useSelector} from 'react-redux';
-import type {RootState} from '../../store/store';
 import {User} from '../../store/userSlice';
+import axios from 'axios';
+import {postLogin} from '../../services/AuthService';
 
 const LoginScreen = ({navigation}: any) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [remindMeCheck, setRemindMeCheck] = useState(false);
   const dispatch = useDispatch();
-  const tokenStore = useSelector((state: RootState) => state.token);
 
   const validateUser = () => {
     if (username !== '' && password !== '') {
@@ -28,17 +26,6 @@ const LoginScreen = ({navigation}: any) => {
   //TODO - Implementar
   const forgotPassword = () => {
     alert('Forgot password');
-  };
-
-  const storeUserAsync = async (user: User) => {
-    try {
-      await AsyncStorage.setItem('user', JSON.stringify(user));
-      console.log('Data successfully saved');
-      return true;
-    } catch (error) {
-      console.log('Error saving data', error);
-      return false;
-    }
   };
 
   /**
@@ -54,22 +41,8 @@ const LoginScreen = ({navigation}: any) => {
     const usernameValue = username;
     const passwordValue = password;
 
-    await fetch(`${BASE_API_URL}login`, {
-      method: 'POST',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        email: usernameValue,
-        password: passwordValue,
-        mobile_device: 'mobile',
-      }),
-    })
+    postLogin(usernameValue, passwordValue)
       .then(response => {
-        return response.json();
-      })
-      .then(async response => {
         console.log('responseJson :', response);
 
         if (response.status == 200) {
@@ -82,26 +55,19 @@ const LoginScreen = ({navigation}: any) => {
           //Save user in async storage
           //TODO  add await?
           if (remindMeCheck) {
-            const log = await storeUserAsync(userState).then(() => {
+            const log = storeUserAsync(userState).then(() => {
               console.log('User saved in async storage');
             });
-            console.log('log: ' + log);
-            console.log(log);
           }
           //Save user with redux
           dispatch(setUser(userState));
-
-          //Save token with redux
-          dispatch(setToken(response.data.token));
 
           //Clean inputs
           setUsername('');
           setPassword('');
           setRemindMeCheck(false);
-
-          //navigation.navigate('MyTabsHome');
         } else {
-          alert('Error');
+          alert(response.message);
           console.log('Error: ' + response.message);
         }
       })
@@ -110,15 +76,23 @@ const LoginScreen = ({navigation}: any) => {
       });
   };
 
-  //TODO - Delete this function and useEffect?
+  const storeUserAsync = async (user: User) => {
+    try {
+      await AsyncStorage.setItem('user', JSON.stringify(user));
+      console.log('Data successfully saved');
+      return true;
+    } catch (error) {
+      console.log('Error saving data', error);
+      return false;
+    }
+  };
+
   const loadUserStorage = async () => {
     try {
       const userStorage = await AsyncStorage.getItem('user');
       console.log('loadUser: ' + userStorage);
       if (userStorage !== null) {
-        const tokenUser: string = JSON.parse(userStorage).token;
         dispatch(setUser(JSON.parse(userStorage)));
-        navigation.navigate('MyTabsHome');
       }
     } catch (error: any) {
       console.log('loadToken: Error in display screen: ' + error.message);
@@ -179,3 +153,61 @@ const styles = StyleSheet.create({
 });
 
 export default LoginScreen;
+
+// await axios
+//   .post(
+//     `${BASE_API_URL}login`,
+//     {
+//       email: usernameValue,
+//       password: passwordValue,
+//       mobile_device: 'mobile',
+//     },
+//     {
+//       headers: {
+//         Accept: 'application/json',
+//         'Content-Type': 'application/json',
+//       },
+//     },
+//   )
+//   .then(async response => {
+//     console.log('responseJson :', response);
+//     return response.data;
+//   })
+//   .then(async response => {
+//     console.log('responseJson :', response);
+
+//     if (response.status == 200) {
+//       const userState: User = {
+//         ...response.data.user,
+//         token: response.data.token,
+//         remember_session: remindMeCheck,
+//       };
+
+//       //Save user in async storage
+//       if (remindMeCheck) {
+//         const log = await storeUserAsync(userState).then(() => {
+//           console.log('User saved in async storage');
+//         });
+//         console.log('log: ' + log);
+//         console.log(log);
+//       }
+//       //Save user with redux
+//       dispatch(setUser(userState));
+
+//       //Save token with redux
+//       dispatch(setToken(response.data.token));
+
+//       //Clean inputs
+//       setUsername('');
+//       setPassword('');
+//       setRemindMeCheck(false);
+
+//       //navigation.navigate('MyTabsHome');
+//     } else {
+//       alert('User or password incorrect');
+//     }
+//   })
+//   .catch(error => {
+//     console.log('error: ' + error);
+//     alert(error);
+//   });

@@ -1,8 +1,8 @@
-import {BASE_API_URL} from '@env';
+import {BASE_API_URL_ANDROID} from '@env';
 
 const fetchOutfits = async () => {
   try {
-    const response = fetch(BASE_API_URL + 'outfits');
+    const response = fetch(BASE_API_URL_ANDROID + 'outfits');
 
     const data = (await response).json();
     //console.log('DATA: ' + JSON.stringify(data, null, 2));

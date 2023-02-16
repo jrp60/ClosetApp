@@ -93,7 +93,6 @@ function Navigation() {
   const loadUserStorage = async () => {
     try {
       const userStorage = await AsyncStorage.getItem('user');
-      console.log('loadUser: ' + userStorage);
       if (userStorage !== null) {
         const tokenUser: string = JSON.parse(userStorage).token;
         dispatch(setUser(JSON.parse(userStorage)));
@@ -105,8 +104,6 @@ function Navigation() {
 
   const InitialScreen = ({navigation}: any) => {
     const userStore = useSelector((state: RootState) => state.user);
-    console.log('UserStore in initial Screen');
-    console.log(userStore);
 
     return (
       <>
@@ -120,7 +117,7 @@ function Navigation() {
   };
   useEffect(() => {
     loadUserStorage();
-    //AsyncStorage.removeItem('user');
+    AsyncStorage.removeItem('user');
   }, []);
   return (
     <NavigationContainer theme={MyTheme}>
