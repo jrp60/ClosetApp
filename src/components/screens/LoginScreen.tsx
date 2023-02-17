@@ -44,6 +44,7 @@ const LoginScreen = ({navigation}: any) => {
     postLogin(usernameValue, passwordValue)
       .then(response => {
         console.log('responseJson :', response);
+        console.log(response);
 
         if (response.status == 200) {
           const userState: User = {

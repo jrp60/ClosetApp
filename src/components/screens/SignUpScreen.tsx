@@ -3,7 +3,7 @@ import {View, StyleSheet, Alert} from 'react-native';
 import TextComponent from '../atoms/TextComponent';
 import TextInputComponent from '../atoms/TextInputComponent';
 import ButtonComponent from '../atoms/ButtonComponent';
-import {BASE_API_URL} from '@env';
+import {BASE_API_URL_IOS} from '@env';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {setToken} from '../../store/tokenSlice';
 import {useDispatch, useSelector} from 'react-redux';
@@ -49,7 +49,7 @@ const SignUpScreen = ({navigation}: any) => {
 
   const doUserRegistration = async () => {
     console.log('Registrando usuario');
-    await fetch(`${BASE_API_URL}register`, {
+    await fetch(`${BASE_API_URL_IOS}register`, {
       method: 'POST',
       headers: {
         Accept: 'application/json',
