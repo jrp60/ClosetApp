@@ -1,14 +1,12 @@
 import React, {useEffect, useState} from 'react';
 import {StyleSheet, View, VirtualizedList} from 'react-native';
 import OutfitMolecule from '../molecules/OutfitMolecule';
-import {increment, decrement} from '../../store/likeCounterSlice';
+import {increment} from '../../store/likeCounterSlice';
 import {useDispatch, useSelector} from 'react-redux';
 import type {RootState} from '../../store/store';
-import fetchOutfits from '../../services/FetchOutfits';
 import TextComponent from '../atoms/TextComponent';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import Colors from '../styles/colors';
-import {BASE_API_URL_IOS} from '@env';
 import {getOutfits} from '../../services/OutfitsService';
 
 const DisplayScreen = () => {
@@ -25,41 +23,15 @@ const DisplayScreen = () => {
     console.log('counter now: ', count);
   };
 
-  const loadOutfits = async () => {
-    try {
-      const response = await fetch(`${BASE_API_URL_IOS}outfits`, {
-        method: 'GET',
-        headers: {
-          Accept: 'application/json',
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      if (response.status == 401) {
-        console.log('loadOutfits: token expired');
-        return;
-      }
-
-      const data = await response.json();
-      if (data.length != 0) {
-        setOutfits(data);
-        setDisplayOutfits(true);
-      }
-    } catch (error: any) {
-      console.log('loadOutfits: Error in display screen: ' + error.message);
-      console.log(error);
-    }
-  };
-
   useEffect(() => {
-    const fetchOut = async () => {
+    const loadOutfits = async () => {
       const outfits = await getOutfits(token);
       if (outfits) {
         setOutfits(outfits);
         setDisplayOutfits(true);
       }
     };
-    fetchOut();
+    loadOutfits();
   }, []);
 
   const renderItem = ({item}: {item: any}) => (

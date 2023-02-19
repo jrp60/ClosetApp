@@ -9,7 +9,6 @@ import {
 } from 'react-native-image-picker';
 import ButtonComponent from '../atoms/ButtonComponent';
 import RNFS from 'react-native-fs';
-import {} from '@env';
 import {useSelector} from 'react-redux';
 import {RootState} from '../../store/store';
 import {postOutfit} from '../../services/OutfitsService';
@@ -19,7 +18,6 @@ const CameraScreen = () => {
 
   const user = useSelector((state: RootState) => state.user.user);
   const token = user.token;
-  //const [singleFile, setSingleFile] = useState(null);
   const [selectedFile, setSelectedFile] = useState<Asset | null>(null);
 
   // React.useEffect(() => {

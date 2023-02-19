@@ -11,12 +11,11 @@ export const postLogin = async (username: string, password: string) => {
         Accept: 'application/json',
         'Content-Type': 'application/json',
       },
-      body: `{"email":"${username}","password":"${password}","mobile_device":"mobile"}`,
-      // body: JSON.stringify({
-      //   email: usernameValue,
-      //   password: passwordValue,
-      //   mobile_device: 'mobile',
-      // }),
+      body: JSON.stringify({
+        email: username,
+        password: password,
+        mobile_device: 'mobile',
+      }),
     });
     const data = await response.json();
     if (data.status == 200) {
@@ -34,24 +33,22 @@ export const postLogin = async (username: string, password: string) => {
 
 export const postRegister = async (
   username: string,
-  password: string,
   email: string,
+  password: string,
+  passwordConfirm: string,
 ) => {
   try {
-    console.log('registrandooo');
-
     const response = await fetch(`${uri}register`, {
       method: 'POST',
       headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json',
       },
-      // body: `{"email":"${email}","password":"${password}","name":"${username}"}`,
-      // check if works with the previous body
       body: JSON.stringify({
         name: username,
         email: email,
         password: password,
+        password_confirmation: passwordConfirm,
       }),
     });
     const data = await response.json();
@@ -62,8 +59,6 @@ export const postRegister = async (
       return data;
     }
   } catch (error) {
-    console.log('Error register');
-
     console.error(error);
   }
 };

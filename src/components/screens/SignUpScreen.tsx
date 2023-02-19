@@ -3,14 +3,13 @@ import {View, StyleSheet, Alert} from 'react-native';
 import TextComponent from '../atoms/TextComponent';
 import TextInputComponent from '../atoms/TextInputComponent';
 import ButtonComponent from '../atoms/ButtonComponent';
-import {BASE_API_URL_IOS} from '@env';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import {setToken} from '../../store/tokenSlice';
 import {useDispatch, useSelector} from 'react-redux';
-import type {RootState} from '../../store/store';
+import {User} from 'src/store/userSlice';
+import {setUser} from '../../store/userSlice';
+import {postRegister} from '../../services/AuthService';
 
 const SignUpScreen = ({navigation}: any) => {
-  const [user, setUser] = useState('');
+  const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [passwordConfirm, setPasswordConfirm] = useState('');
@@ -27,19 +26,22 @@ const SignUpScreen = ({navigation}: any) => {
   const validateEmail = (text: string) => {
     let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w\w+)+$/;
     if (reg.test(text) === false) {
-      console.log('Email is Not Correct');
       Alert.alert('Email is not correct');
       return false;
     } else {
-      console.log('Email is Correct');
       return true;
     }
   };
 
   //TODO - Add async?
   const signUpValidation = () => {
-    if (user != '' && email != '' && password != '' && passwordConfirm != '') {
-      if (validateEmail(email)) {
+    if (
+      username != '' &&
+      email != '' &&
+      password != '' &&
+      passwordConfirm != ''
+    ) {
+      if (validateEmail(email) && validatePassword()) {
         doUserRegistration();
       }
     } else {
@@ -49,27 +51,20 @@ const SignUpScreen = ({navigation}: any) => {
 
   const doUserRegistration = async () => {
     console.log('Registrando usuario');
-    await fetch(`${BASE_API_URL_IOS}register`, {
-      method: 'POST',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        name: user,
-        email: email,
-        password: password,
-      }),
-    })
-      .then(response => response.json())
+    postRegister(username, email, password, passwordConfirm)
+      //.then(response => response.json())
       .then(responseJson => {
         console.log(responseJson);
         if (responseJson.status == 200) {
           console.log('Usuario registrado');
-          //Save token with redux
-          //TODO - save user instead, with redux
-          dispatch(setToken(responseJson.data.token));
-          navigation.navigate('MyTabsHome');
+          //Save user with redux
+          const userState: User = {
+            ...responseJson.data.user,
+            token: responseJson.data.token,
+            remember_session: false,
+          };
+          dispatch(setUser(userState));
+          navigation.navigate('Home');
         } else {
           for (const error in responseJson.errors) {
             if (responseJson.errors.hasOwnProperty(error)) {
@@ -90,8 +85,8 @@ const SignUpScreen = ({navigation}: any) => {
       <TextComponent type="title">Crete Account</TextComponent>
       <TextInputComponent
         placeholder={'User'}
-        value={user}
-        onChangeText={setUser}
+        value={username}
+        onChangeText={setUsername}
         style={styles.input}
         autoCapitalize="none"
       />

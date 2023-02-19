@@ -56,7 +56,7 @@ const LoginScreen = ({navigation}: any) => {
           //Save user in async storage
           //TODO  add await?
           if (remindMeCheck) {
-            const log = storeUserAsync(userState).then(() => {
+            storeUserAsync(userState).then(() => {
               console.log('User saved in async storage');
             });
           }
