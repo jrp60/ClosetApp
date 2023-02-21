@@ -2,6 +2,8 @@ import React from 'react';
 import TextComponent from '../atoms/TextComponent';
 import ButtonComponent from '../atoms/ButtonComponent';
 import {View, StyleSheet} from 'react-native';
+import LoadingComponent from '../atoms/LoadingComponent';
+import Colors from '../styles/colors';
 
 const HelloWorldScreen = () => {
   return (
@@ -22,6 +24,7 @@ const HelloWorldScreen = () => {
         onPress={() => {}}
         text="Tertiary"
         style={styles.marginButton}></ButtonComponent>
+      <LoadingComponent color={Colors.primary} />
     </View>
   );
 };

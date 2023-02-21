@@ -8,12 +8,15 @@ import {useDispatch, useSelector} from 'react-redux';
 import {User} from '../../store/userSlice';
 import axios from 'axios';
 import {postLogin} from '../../services/AuthService';
+import LoadingComponent from '../atoms/LoadingComponent';
+import Colors from '../styles/colors';
 
 const LoginScreen = ({navigation}: any) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [remindMeCheck, setRemindMeCheck] = useState(false);
   const dispatch = useDispatch();
+  const [loading, setLoading] = useState(false);
 
   const validateUser = () => {
     if (username !== '' && password !== '') {
@@ -41,8 +44,10 @@ const LoginScreen = ({navigation}: any) => {
     const usernameValue = username;
     const passwordValue = password;
 
+    setLoading(true);
+
     postLogin(usernameValue, passwordValue)
-      .then(response => {
+      .then(async response => {
         console.log('responseJson :', response);
         console.log(response);
 
@@ -56,7 +61,7 @@ const LoginScreen = ({navigation}: any) => {
           //Save user in async storage
           //TODO  add await?
           if (remindMeCheck) {
-            storeUserAsync(userState).then(() => {
+            await storeUserAsync(userState).then(() => {
               console.log('User saved in async storage');
             });
           }
@@ -71,9 +76,11 @@ const LoginScreen = ({navigation}: any) => {
           alert(response.message);
           console.log('Error: ' + response.message);
         }
+        setLoading(false);
       })
       .catch(error => {
         console.error(error);
+        setLoading(false);
       });
   };
 
@@ -105,35 +112,46 @@ const LoginScreen = ({navigation}: any) => {
   }, []);
 
   return (
-    <View style={styles.container}>
-      <Image
-        source={require('../../../assets/images/logo.png')}
-        style={styles.image}
-        resizeMode="contain"
-      />
-      <LoginFormMolecule
-        style={styles.loginForm}
-        onChangeTextUser={setUsername}
-        onChangeTextPass={setPassword}
-        userValue={username}
-        passValue={password}
-        validateUser={validateUser}
-        forgotPassword={forgotPassword}
-        remindMeCheck={remindMeCheck}
-        setRemindMeCheck={setRemindMeCheck}
-      />
-
-      <ButtonComponent
-        onPress={() => navigation.navigate('SignUp')}
-        text="Sign Up"
-        style={styles.signUp}
-        type="tertiary"
-      />
+    <View style={styles.containerMain}>
+      {loading ? (
+        <View style={styles.container}>
+          <LoadingComponent color={Colors.primary} />
+        </View>
+      ) : (
+        <View style={styles.container}>
+          <Image
+            source={require('../../../assets/images/logo.png')}
+            style={styles.image}
+            resizeMode="contain"
+          />
+          <LoginFormMolecule
+            style={styles.loginForm}
+            onChangeTextUser={setUsername}
+            onChangeTextPass={setPassword}
+            userValue={username}
+            passValue={password}
+            validateUser={validateUser}
+            forgotPassword={forgotPassword}
+            remindMeCheck={remindMeCheck}
+            setRemindMeCheck={setRemindMeCheck}
+          />
+          <ButtonComponent
+            onPress={() => navigation.navigate('SignUp')}
+            text="Sign Up"
+            style={styles.signUp}
+            type="tertiary"
+          />
+        </View>
+      )}
     </View>
   );
 };
 
 const styles = StyleSheet.create({
+  containerMain: {
+    flex: 1,
+    //backgroundColor: Colors.background,
+  },
   container: {
     flex: 1,
     alignItems: 'center',

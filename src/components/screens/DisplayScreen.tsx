@@ -8,6 +8,7 @@ import TextComponent from '../atoms/TextComponent';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import Colors from '../styles/colors';
 import {getOutfits} from '../../services/OutfitsService';
+import LoadingComponent from '../atoms/LoadingComponent';
 
 const DisplayScreen = () => {
   const count = useSelector((state: RootState) => state.likeCounter.value);
@@ -51,8 +52,9 @@ const DisplayScreen = () => {
         />
       ) : (
         <View style={styles.container}>
-          <TextComponent type="title">No data to display</TextComponent>
-          <Ionicons name="sad-outline" size={64} color={Colors.primary} />
+          <LoadingComponent />
+          <TextComponent type="title">Loading outfits...</TextComponent>
+          {/* <Ionicons name="sad-outline" size={64} color={Colors.primary} /> */}
         </View>
       )}
     </View>
