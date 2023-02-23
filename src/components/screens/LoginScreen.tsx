@@ -12,8 +12,8 @@ import LoadingComponent from '../atoms/LoadingComponent';
 import Colors from '../styles/colors';
 
 const LoginScreen = ({navigation}: any) => {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+  const [username, setUsername] = useState('admin');
+  const [password, setPassword] = useState('admin');
   const [remindMeCheck, setRemindMeCheck] = useState(false);
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
@@ -61,9 +61,13 @@ const LoginScreen = ({navigation}: any) => {
           //Save user in async storage
           //TODO  add await?
           if (remindMeCheck) {
-            await storeUserAsync(userState).then(() => {
-              console.log('User saved in async storage');
-            });
+            try {
+              await storeUserAsync(userState).then(() => {
+                console.log('User saved in async storage');
+              });
+            } catch (error) {
+              console.log('Error saving user in async storage');
+            }
           }
           //Save user with redux
           dispatch(setUser(userState));
@@ -108,8 +112,24 @@ const LoginScreen = ({navigation}: any) => {
   };
   useEffect(() => {
     loadUserStorage();
+
     console.log('username: ' + username);
+    //clearAllData();
   }, []);
+
+  const clearAllData = () => {
+    //AsyncStorage.clear();
+    //console.log('clearAllData');
+
+    AsyncStorage.getAllKeys()
+      .then(keys => {
+        console.log('keys: ');
+        console.log(keys);
+
+        AsyncStorage.multiRemove(keys);
+      })
+      .then(() => alert('success'));
+  };
 
   return (
     <View style={styles.containerMain}>

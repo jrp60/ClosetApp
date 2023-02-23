@@ -1,5 +1,13 @@
 import React, {useState} from 'react';
-import {View, Text, StyleSheet, Button, Platform, Image} from 'react-native';
+import {
+  View,
+  Text,
+  StyleSheet,
+  Button,
+  Platform,
+  Image,
+  Alert,
+} from 'react-native';
 import {
   Asset,
   CameraOptions,
@@ -70,13 +78,13 @@ const CameraScreen = () => {
   };
 
   const createOutfit = async (selectedImage: Asset) => {
-    console.log('WTF');
-
     await postOutfit(selectedImage, token)
       .then(response => {
         if (response.status == 200) {
           console.log('Image saved');
           console.log('Response message: ' + response.data.message);
+          Alert.alert('Outfit created');
+          setSelectedFile(null);
         } else {
           alert('Error saving image');
           console.log('Error: ' + response.message);
@@ -86,25 +94,6 @@ const CameraScreen = () => {
         console.error(error);
         console.log('Catched error');
       });
-  };
-
-  //TODO - Delete this function
-  const saveImage = async (imageUri: string, folderPath: any) => {
-    console.log('Saving image');
-
-    const fileName = imageUri.split('/').pop();
-    const destinationPath = `${folderPath}/${fileName}`;
-    //const destinationPath = `${RNFS.DocumentDirectoryPath}/${folderPath}/${fileName}`;
-    console.log('DestinationPath: ', destinationPath);
-
-    try {
-      await RNFS.mkdir(`${RNFS.DocumentDirectoryPath}/${folderPath}`);
-      console.log(`${RNFS.DocumentDirectoryPath}/${folderPath}`);
-
-      console.log('Image save to: ', destinationPath);
-    } catch (err: any) {
-      console.log(err.message);
-    }
   };
 
   return (
