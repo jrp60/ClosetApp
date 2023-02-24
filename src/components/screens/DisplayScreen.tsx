@@ -7,7 +7,7 @@ import type {RootState} from '../../store/store';
 import TextComponent from '../atoms/TextComponent';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import Colors from '../styles/colors';
-import {getOutfits} from '../../services/OutfitsService';
+import {getOutfits, postOutfitLike} from '../../services/OutfitsService';
 import LoadingComponent from '../atoms/LoadingComponent';
 
 const DisplayScreen = () => {
@@ -54,7 +54,6 @@ const DisplayScreen = () => {
         <View style={styles.container}>
           <LoadingComponent />
           <TextComponent type="title">Loading outfits...</TextComponent>
-          {/* <Ionicons name="sad-outline" size={64} color={Colors.primary} /> */}
         </View>
       )}
     </View>

@@ -21,8 +21,6 @@ export const getOutfits = async (token: string) => {
 
     const data = await response.json();
     if (data.length != 0) {
-      console.log('we have outfits');
-
       return data;
     }
   } catch (error: any) {
@@ -49,8 +47,6 @@ export const postOutfit = async (selectedImage: Asset, token: string) => {
     name: `image.${ext}`,
   });
 
-  console.log('post blob ');
-
   formData.append('name', 'test');
   formData.append('description', 'test');
   formData.append('price', '100');
@@ -73,6 +69,112 @@ export const postOutfit = async (selectedImage: Asset, token: string) => {
     return data;
   } catch (error) {
     console.log('Error post outfit service: ' + error);
+
+    console.error(error);
+  }
+};
+
+// USER_OUTFIT
+export const postOutfitLike = async (
+  outfitId: number,
+  userId: string,
+  token: string,
+) => {
+  console.log('outfitId: ' + outfitId);
+  console.log('userId: ' + userId);
+
+  try {
+    const response = await fetch(`${uri}user_outfit/like`, {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({
+        user_id: userId,
+        outfit_id: outfitId,
+      }),
+    });
+    console.log('response: ');
+    console.log(response);
+
+    const data = await response.json();
+    console.log('data: ');
+    console.log(data);
+
+    return response;
+  } catch (error) {
+    console.log('Error post outfit like service: ' + error);
+
+    console.error(error);
+  }
+};
+
+export const getIsLiked = async (
+  outfitId: number,
+  userId: string,
+  token: string,
+) => {
+  try {
+    const response = await fetch(
+      `${uri}user_outfit/getLike/${userId}/${outfitId}`,
+      {
+        method: 'GET',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+        // body: JSON.stringify({
+        //   outfit_id: outfitId,
+        //   user_id: userId,
+        // }),
+      },
+    );
+    const data = await response.json();
+    console.log('data: ');
+    console.log(data);
+
+    return data;
+  } catch (error) {
+    console.log('Error get is liked service: ' + error);
+
+    console.error(error);
+  }
+};
+
+export const deleteOutfitLike = async (
+  outfitId: number,
+  userId: string,
+  token: string,
+) => {
+  try {
+    const response = await fetch(
+      `${uri}user_outfit/delete/${userId}/${outfitId}`,
+      {
+        method: 'DELETE',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+        // body: JSON.stringify({
+        //   outfit_id: outfitId,
+        //   user_id: userId,
+        // }),
+      },
+    );
+    console.log('response: ');
+    console.log(response);
+
+    const data = await response.json();
+    console.log('data: ');
+    console.log(data);
+
+    return data;
+  } catch (error) {
+    console.log('Error delete outfit like service: ' + error);
 
     console.error(error);
   }
